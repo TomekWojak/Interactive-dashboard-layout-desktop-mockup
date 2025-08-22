@@ -4,13 +4,16 @@
 	box-sizing: border-box;
 }
 :root {
-	--header-height: 8rem;
+	--main-color: #0c131d;
+	--header-height: 10rem;
 	--main-padding: 2em 4em;
-	--card-padding: 2em;
-	--main-color: #a0a0b2;
+	--card-padding: 4em 3em;
+	--components-main-color: #a0a0b2;
 	--accent: #7c3aed;
 	--card-color: #161a26;
 	--card-radius: 10px;
+	--title-color: #dedbdb;
+	--container-padding: 4em;
 }
 html {
 	font-size: 62.5%;
@@ -21,10 +24,10 @@ body {
 	grid-template-rows: var(--header-height) 1fr;
 	grid-template-columns: 250px 1fr;
 	font-family: "Montserrat", sans-serif;
-	background-color: #0c131d;
+	background-color: var(--main-color);
 }
 .header {
-	position: fixed;
+	position: sticky;
 	width: 100%;
 	top: 0;
 	left: 0;
@@ -35,10 +38,11 @@ body {
 	grid-column: 1 / -1;
 	padding: var(--main-padding);
 	border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+	background-color: var(--main-color);
 
 	&__logo {
 		text-decoration: none;
-		color: var(--main-color);
+		color: var(--components-main-color);
 		font-weight: 600;
 		font-size: 2.6rem;
 		vertical-align: middle;
@@ -54,6 +58,35 @@ body {
 		align-items: center;
 		gap: 2em;
 	}
+	&__pro-subscribtion-btn {
+		position: relative;
+		width: 14rem;
+		padding: 1em 2em;
+		border-radius: 30px;
+		border: none;
+		font-family: inherit;
+		cursor: pointer;
+		color: #fff;
+		background: linear-gradient(90deg, #8b5cf6, #ec4899, #f97316);
+		font-weight: 600;
+		font-size: 1.3rem;
+
+		&:hover::before {
+			opacity: .7;
+		}
+
+		&::before {
+			content: "";
+			position: absolute;
+			inset: -1px;
+			background: linear-gradient(90deg, #8b5cf6, #ec4899, #f97316);
+			z-index: -1;
+			border-radius: inherit;
+			filter: blur(10px);
+			opacity: 0.4;
+			transition: opacity 0.3s;
+		}
+	}
 	&__btn {
 		display: flex;
 		justify-content: center;
@@ -63,7 +96,7 @@ body {
 		width: 37px;
 		height: 37px;
 		background: none;
-		color: var(--main-color);
+		color: var(--components-main-color);
 		font-size: 2rem;
 		cursor: pointer;
 
@@ -75,13 +108,14 @@ body {
 		}
 		&--user {
 			position: relative;
-			background: linear-gradient(135deg, #7c3aedcc, transparent);
+			background: linear-gradient(135deg, #4f46e5, #9333ea);
 			border-radius: 50%;
 			font-size: 1.6rem;
 			overflow: hidden;
+			color: #c2c2d6;
 
 			&:hover {
-				color: #c2c2d6;
+				color: #dfdfeb;
 			}
 			&:hover::before {
 				animation: shineAnimation 0.4s 0.1s forwards;
@@ -116,6 +150,7 @@ body {
 	flex-direction: column;
 	justify-content: flex-end;
 	border-right: 1px solid rgba(255, 255, 255, 0.05);
+	background-color: var(--main-color);
 
 	&__links {
 		list-style: none;
@@ -131,7 +166,7 @@ body {
 		width: 90%;
 		padding: 0.8em 2em;
 		text-decoration: none;
-		color: var(--main-color);
+		color: var(--components-main-color);
 		font-size: 2rem;
 		vertical-align: middle;
 		font-weight: 300;
@@ -155,24 +190,37 @@ main {
 	grid-column: 2 / -1;
 }
 .container {
-	width: min(100%, 1000px);
+	padding: var(--container-padding);
+	display: grid;
+	width: min(100%, 137rem);
 	margin: 0 auto;
+	grid-auto-columns: 1fr;
+	grid-template-areas:
+		"statistics statistics statistics"
+		"earnings sales activity"
+		"report report activity";
+	gap: 2em;
+}
+.title {
+	font-weight: 500;
+	color: var(--title-color);
+	font-size: 2rem;
 }
 .statistics {
+	grid-area: statistics;
 	padding: var(--card-padding);
 	border-radius: var(--card-radius);
 	background-color: var(--card-color);
 
 	&__title {
-		font-weight: 500;
 		margin-block-end: 2em;
-		color: #dedbdb;
 	}
 	&__chart {
+		width: min(100%, 700px);
 		display: flex;
 		align-items: flex-end;
 		justify-content: space-evenly;
-		color: var(--main-color);
+		color: var(--components-main-color);
 	}
 	&__box {
 		display: flex;
@@ -183,12 +231,131 @@ main {
 	&__column {
 		width: 25px;
 		height: 150px;
-		background-color: var(--main-color);
+		background-color: var(--components-main-color);
 		opacity: 0.2;
 		border-radius: 2px;
+		transition: opacity 0.6s, height 0.6s;
+
+		&:hover {
+			opacity: 0.35;
+		}
 	}
 	&__month {
 		font-size: 1.2rem;
+	}
+}
+
+.earnings,
+.sales {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	padding: var(--card-padding);
+	background-color: var(--card-color);
+	border-radius: var(--card-radius);
+	&__title {
+		margin-block-end: 0.5em;
+	}
+	&__price {
+		color: var(--title-color);
+		font-size: 3.6rem;
+		font-weight: 500;
+	}
+}
+.earnings {
+	grid-area: earnings;
+}
+.sales {
+	grid-area: sales;
+}
+.circle {
+	position: absolute;
+	width: 150px;
+	height: 150px;
+	background-color: #ffffff9a;
+	border-radius: 50%;
+	transform: translate(-50%, -50%) scale(0);
+	animation: fade 0.3s;
+}
+.activity {
+	grid-area: activity;
+	padding: var(--card-padding);
+	border-radius: var(--card-radius);
+	background-color: var(--card-color);
+	&__title {
+		margin-block-end: 0.5em;
+	}
+	&__list {
+		padding: 0 2em;
+	}
+	&__li {
+		padding: 0.5em 0;
+		color: var(--title-color);
+		opacity: 0.85;
+		font-size: 1.5rem;
+		transition: opacity 0.6s;
+
+		&:hover {
+			opacity: 1;
+		}
+		&:hover::marker {
+			color: rgba(255, 255, 255, 0.4);
+		}
+
+		&::marker {
+			color: rgba(255, 255, 255, 0.2);
+			font-size: 2rem;
+			transition: color 0.6s;
+		}
+	}
+}
+
+.report {
+	grid-area: report;
+	padding: var(--card-padding);
+	border-radius: var(--card-radius);
+	background: linear-gradient(135deg, #4f46e5, #9333ea);
+
+	&__title,
+	&__text {
+		color: #fff;
+	}
+	&__title {
+		font-size: 2rem;
+
+		i {
+			margin-inline-start: 0.3em;
+			font-size: 2.6rem;
+			vertical-align: middle;
+		}
+	}
+	&__text {
+		margin: 1em 0 1.5em;
+		font-size: 1.6rem;
+	}
+	&__btn {
+		position: relative;
+		padding: 1em 2em;
+		background-color: #fff;
+		color: #4f46e5;
+		font-family: inherit;
+		font-weight: 700;
+		border: none;
+		border-radius: 10px;
+		cursor: pointer;
+		border: 2px solid transparent;
+		transition: color 0.5s, background-color 0.5s, border-color 0.5s,
+			transform 0.3s;
+		overflow: hidden;
+
+		&:hover {
+			color: #fff;
+			background: none;
+			border-color: #fff;
+		}
+		&:active {
+			transform: scale(0.98);
+		}
 	}
 }
 
@@ -200,5 +367,12 @@ main {
 	to {
 		top: -1.5em;
 		left: 100%;
+	}
+}
+
+@keyframes fade {
+	to {
+		transform: translate(-50%, -50%) scale(1);
+		opacity: 0;
 	}
 }
