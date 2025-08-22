@@ -6,8 +6,11 @@
 :root {
 	--header-height: 8rem;
 	--main-padding: 2em 4em;
+	--card-padding: 2em;
 	--main-color: #a0a0b2;
 	--accent: #7c3aed;
+	--card-color: #161a26;
+	--card-radius: 10px;
 }
 html {
 	font-size: 62.5%;
@@ -131,18 +134,61 @@ body {
 		color: var(--main-color);
 		font-size: 2rem;
 		vertical-align: middle;
-        font-weight: 300;
-        transition: color .3s, transform .3s;
+		font-weight: 300;
+		transition: color 0.3s, transform 0.3s;
 
-        &:hover, &.active {
-            color: var(--accent);
-            transform: translateX(5px);
-        }
+		&:hover,
+		&.active {
+			color: var(--accent);
+			transform: translateX(5px);
+		}
 
 		i {
 			font-size: 1.6rem;
 			margin-inline-end: 0.8em;
 		}
+	}
+}
+
+main {
+	grid-row: 2 / -1;
+	grid-column: 2 / -1;
+}
+.container {
+	width: min(100%, 1000px);
+	margin: 0 auto;
+}
+.statistics {
+	padding: var(--card-padding);
+	border-radius: var(--card-radius);
+	background-color: var(--card-color);
+
+	&__title {
+		font-weight: 500;
+		margin-block-end: 2em;
+		color: #dedbdb;
+	}
+	&__chart {
+		display: flex;
+		align-items: flex-end;
+		justify-content: space-evenly;
+		color: var(--main-color);
+	}
+	&__box {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 1.5em;
+	}
+	&__column {
+		width: 25px;
+		height: 150px;
+		background-color: var(--main-color);
+		opacity: 0.2;
+		border-radius: 2px;
+	}
+	&__month {
+		font-size: 1.2rem;
 	}
 }
 
