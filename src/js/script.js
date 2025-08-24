@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
 	const chart = document.querySelector(".statistics__chart");
 	const reportBtn = document.querySelector(".report__btn");
-
+	const links = document.querySelectorAll(".nav__link");
 	const months = [
 		"Jan",
 		"Feb",
@@ -16,6 +16,12 @@ document.addEventListener("DOMContentLoaded", function () {
 		"Nov",
 		"Dec",
 	];
+
+	const handleNavLinks = (e) => {
+		e.preventDefault();
+		links.forEach((link) => link.classList.remove("active"));
+		e.target.classList.add("active");
+	};
 
 	const btnClickAnimation = (e) => {
 		const circle = document.createElement("span");
@@ -66,5 +72,6 @@ document.addEventListener("DOMContentLoaded", function () {
 	};
 
 	createColumns();
+	links.forEach((link) => link.addEventListener("click", handleNavLinks));
 	reportBtn.addEventListener("click", btnClickAnimation);
 });
