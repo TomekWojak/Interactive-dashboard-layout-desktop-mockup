@@ -71,6 +71,10 @@ body {
 		font-weight: 600;
 		font-size: 1.3rem;
 
+		i {
+			color: gold;
+			margin-inline-end: .3em;
+		}
 		&:hover::before {
 			opacity: .7;
 		}
