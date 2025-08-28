@@ -261,16 +261,19 @@ main {
 	stroke-width: 6;
 }
 
-.progress-ring__progress {
+.progress-ring__progress, .progress-ring__progress-bg {
 	fill: none;
 	stroke: url(#grad1);
-	stroke-width: 6;
+	stroke-width: 0;
 	stroke-linecap: round;
-	// stroke-dasharray: 314;
-	stroke-dashoffset: 0;
-	transition: stroke-dashoffset 0.3s;
+	stroke-dasharray: 314;
+	stroke-dashoffset: 314;
+	transition: stroke-dashoffset 1s ease-in-out;
 }
-
+.progress-ring__progress-bg {
+	filter: blur(3px);
+	opacity: 0.6;
+}
 .progress-text {
 	font-size: 1rem;
 	fill: #fff;

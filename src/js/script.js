@@ -16,13 +16,39 @@ document.addEventListener("DOMContentLoaded", function () {
 		"Nov",
 		"Dec",
 	];
-
+	const CIRCLE_DASHARR = 314;
 	const handleNavLinks = (e) => {
 		e.preventDefault();
 		links.forEach((link) => link.classList.remove("active"));
 		e.target.classList.add("active");
 	};
+	const handleRingStats = () => {
+		const rings = [
+			document.querySelector(".progress-ring__progress"),
+			document.querySelector(".progress-ring__progress-bg"),
+		];
+		const earnings = parseFloat(
+			document
+				.querySelector(".progress-ring tspan:first-of-type")
+				.textContent.replace(",", ".")
+				.slice(1, -1)
+		);
+		const destiny = parseFloat(
+			document
+				.querySelector(".progress-ring tspan:last-of-type")
+				.textContent.replace(",", ".")
+				.slice(3, -1)
+		);
+		const earningsPercentage = (earnings / destiny).toFixed(5);
+		const finalOffset = Math.floor(CIRCLE_DASHARR * (1 - earningsPercentage));
 
+		setTimeout(() => {
+			rings.forEach((ring) => {
+				ring.style.strokeDashoffset = finalOffset;
+				ring.style.strokeWidth = 6;
+			});
+		}, 100);
+	};
 	const btnClickAnimation = (e) => {
 		const circle = document.createElement("span");
 		circle.classList.add("circle");
@@ -71,6 +97,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		}
 	};
 
+	handleRingStats();
 	createColumns();
 	links.forEach((link) => link.addEventListener("click", handleNavLinks));
 	reportBtn.addEventListener("click", btnClickAnimation);
