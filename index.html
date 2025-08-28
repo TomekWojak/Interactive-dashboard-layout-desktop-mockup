@@ -43,7 +43,23 @@
 
                 </div>
             </div>
+            <div class="progress-ring">
+                <svg class="progress-ring" viewBox="0 0 120 120" width="250" height="250">
+                    <defs>
+                        <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" stop-color="#9333ea" />
+                            <stop offset="100%" stop-color="#4f46e5" />
+                        </linearGradient>
+                    </defs>
+                    <circle class="progress-ring__bg" cx="60" cy="60" r="50" />
+                    <circle class="progress-ring__progress" cx="60" cy="60" r="50" />
 
+                    <text x="50%" y="50%" text-anchor="middle" dominant-baseline="middle" class="progress-text">
+                        <tspan x="50%" dy="-0.5em" font-size="16">$63,456</tspan>
+                        <tspan x="50%" dy="2em" font-size="9">/ $100,000</tspan>
+                    </text>
+                </svg>
+            </div>
             <div class="earnings">
                 <h2 class="earnings__title title">Earnings</h2>
                 <span class="earnings__price">$63,450</span>

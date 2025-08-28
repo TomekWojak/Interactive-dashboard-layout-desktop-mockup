@@ -73,10 +73,10 @@ body {
 
 		i {
 			color: gold;
-			margin-inline-end: .3em;
+			margin-inline-end: 0.3em;
 		}
 		&:hover::before {
-			opacity: .7;
+			opacity: 0.5;
 		}
 
 		&::before {
@@ -87,7 +87,7 @@ body {
 			z-index: -1;
 			border-radius: inherit;
 			filter: blur(10px);
-			opacity: 0.4;
+			opacity: 0.25;
 			transition: opacity 0.3s;
 		}
 	}
@@ -200,7 +200,7 @@ main {
 	margin: 0 auto;
 	grid-auto-columns: 1fr;
 	grid-template-areas:
-		"statistics statistics statistics"
+		"statistics statistics ring"
 		"earnings sales activity"
 		"report report activity";
 	gap: 2em;
@@ -246,6 +246,39 @@ main {
 	}
 	&__month {
 		font-size: 1.2rem;
+	}
+}
+.progress-ring {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: var(--card-color);
+	border-radius: var(--card-radius);
+}
+.progress-ring__bg {
+	fill: none;
+	stroke: #333;
+	stroke-width: 6;
+}
+
+.progress-ring__progress {
+	fill: none;
+	stroke: url(#grad1);
+	stroke-width: 6;
+	stroke-linecap: round;
+	// stroke-dasharray: 314;
+	stroke-dashoffset: 0;
+	transition: stroke-dashoffset 0.3s;
+}
+
+.progress-text {
+	font-size: 1rem;
+	fill: #fff;
+	font-weight: bold;
+
+	tspan:last-child {
+		font-weight: 500;
+		color: var(--components-main-color);
 	}
 }
 
@@ -315,6 +348,10 @@ main {
 }
 
 .report {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: flex-start;
 	grid-area: report;
 	padding: var(--card-padding);
 	border-radius: var(--card-radius);
