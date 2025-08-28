@@ -73,20 +73,31 @@ document.addEventListener("DOMContentLoaded", function () {
 			const box = document.createElement("div");
 			const column = document.createElement("div");
 			const monthName = document.createElement("span");
+			const tooltip = document.createElement("div");
+
 			box.classList.add("statistics__box");
 			monthName.classList.add("statistics__month");
 			column.classList.add("statistics__column");
+			tooltip.classList.add("statistics__tooltip");
+
+			tooltip.textContent = `Total revenue: $${Math.floor(
+				Math.random() * 80 + 20
+			)}00`;
+			tooltip.style.opacity = 0;
 
 			monthName.textContent = months[i];
 
 			box.append(column);
+			box.append(tooltip);
+
 			box.append(monthName);
 			chart.append(box);
+
+			handleTooltips(box, tooltip);
 		}
 		const allColumns = Array.from(
 			document.getElementsByClassName("statistics__column")
 		);
-
 		if (allColumns) {
 			setTimeout(() => {
 				allColumns.forEach((column) => {
@@ -95,6 +106,15 @@ document.addEventListener("DOMContentLoaded", function () {
 				});
 			}, 100);
 		}
+	};
+
+	const handleTooltips = (box, tooltip) => {
+		box.addEventListener("mouseover", () => {
+			tooltip.style.opacity = 1;
+		});
+		box.addEventListener("mouseleave", () => {
+			tooltip.style.opacity = 0;
+		});
 	};
 
 	handleRingStats();

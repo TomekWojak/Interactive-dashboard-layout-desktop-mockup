@@ -227,6 +227,7 @@ main {
 		color: var(--components-main-color);
 	}
 	&__box {
+		position: relative;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
@@ -247,6 +248,18 @@ main {
 	&__month {
 		font-size: 1.2rem;
 	}
+	&__tooltip {
+		padding: 0.4em;
+		position: absolute;
+		top: 0;
+		left: 0;
+		background-color: rgba(255, 255, 255, 0.2);
+		backdrop-filter: blur(5px);
+		font-size: 1.4rem;
+		border-radius: 5px;
+		transition: opacity .5s .2s;
+		white-space: nowrap;
+	}
 }
 .progress-ring {
 	display: flex;
@@ -261,7 +274,8 @@ main {
 	stroke-width: 6;
 }
 
-.progress-ring__progress, .progress-ring__progress-bg {
+.progress-ring__progress,
+.progress-ring__progress-bg {
 	fill: none;
 	stroke: url(#grad1);
 	stroke-width: 0;
