@@ -17,10 +17,35 @@ document.addEventListener("DOMContentLoaded", function () {
 		"Dec",
 	];
 	const CIRCLE_DASHARR = 314;
+	const messagesPanel = document.querySelector(".notifications-box");
+	const headerPanel = document.querySelector(".header__panel");
+	const closeHeaderPanelBtn = document.querySelector(
+		".notifications-box__close"
+	);
+
 	const handleNavLinks = (e) => {
 		e.preventDefault();
 		links.forEach((link) => link.classList.remove("active"));
 		e.target.classList.add("active");
+	};
+	const handleHeaderPanel = (e) => {
+		console.log(e.target);
+		if (e.target.matches(".header__btn--bell")) {
+			showMsgPanel();
+		} else {
+			console.log("s");
+		}
+	};
+	const showMsgPanel = () => {
+		messagesPanel.classList.add("active");
+	};
+	const hideMsgPanel = () => {
+		messagesPanel.classList.add("hidden");
+		messagesPanel.classList.remove("active");
+
+		setTimeout(() => {
+			messagesPanel.classList.remove("hidden");
+		}, 300);
 	};
 	const handleRingStats = () => {
 		const rings = [
@@ -102,9 +127,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
 	const handleTooltips = (column, tooltip) => {
 		column.addEventListener("mouseover", (e) => {
-			const position = Math.floor(Math.random() * 20)
+			const position = Math.floor(Math.random() * 20);
 			tooltip.style.top = position - e.clientY / 10 + "px";
-			tooltip.style.left = position - e.clientX / 10+ "px";
+			tooltip.style.left = position - e.clientX / 10 + "px";
 			tooltip.style.opacity = 1;
 		});
 		column.addEventListener("mouseleave", () => {
@@ -114,6 +139,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
 	handleRingStats();
 	createColumns();
+	closeHeaderPanelBtn.addEventListener("click", hideMsgPanel);
+	headerPanel.addEventListener("click", handleHeaderPanel);
 	links.forEach((link) => link.addEventListener("click", handleNavLinks));
 	reportBtn.addEventListener("click", btnClickAnimation);
 });

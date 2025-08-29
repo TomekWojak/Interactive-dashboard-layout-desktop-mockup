@@ -39,6 +39,7 @@ body {
 	padding: var(--main-padding);
 	border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 	background-color: var(--main-color);
+	z-index: 1000;
 
 	&__logo {
 		text-decoration: none;
@@ -105,6 +106,7 @@ body {
 		cursor: pointer;
 
 		i {
+			pointer-events: none;
 			transition: color 0.3s;
 		}
 		&:hover {
@@ -155,6 +157,7 @@ body {
 	grid-column: 1 / 2;
 	border-right: 1px solid rgba(255, 255, 255, 0.05);
 	background-color: var(--main-color);
+	z-index: 1000;
 
 	&__user-box {
 		padding: 1em 1.5em;
@@ -236,6 +239,7 @@ main {
 	grid-column: 2 / -1;
 }
 .container {
+	position: relative;
 	padding: var(--container-padding);
 	display: grid;
 	width: min(100%, 137rem);
@@ -246,6 +250,7 @@ main {
 		"earnings sales activity"
 		"report report activity";
 	gap: 2em;
+	z-index: 999;
 }
 .title {
 	font-weight: 500;
@@ -304,6 +309,94 @@ main {
 		pointer-events: none;
 	}
 }
+
+.notifications-box {
+	position: fixed;
+	display: none;
+	opacity: 0;
+	transform: scale(0);
+	right: 2em;
+	top: var(--header-height);
+	padding: 3em 2em;
+	min-width: 30rem;
+	background-color: #040d1b;
+	color: #fff;
+	border-radius: var(--card-radius);
+	z-index: 999;
+	transform-origin: top;
+
+	&.active {
+		display: block;
+		animation: messagesAnimation 0.5s forwards;
+	}
+	&.hidden {
+		display: block;
+		animation: messagesHideAnimation 0.3s forwards;
+	}
+
+	&__head {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
+	&__body {
+		margin-block-start: 2em;
+	}
+	&__title {
+		font-size: 2rem;
+		font-weight: 500;
+		color: var(--title-color);
+	}
+	&__notification {
+		padding: 1.5em;
+		margin-block-end: 1.2em;
+		background-color: var(--card-color);
+		border-radius: var(--card-radius);
+		cursor: pointer;
+		transition: background-color 0.3s;
+
+		&:hover {
+			background-color: #242a3b;
+		}
+	}
+	&__close {
+		background: none;
+		border: none;
+		color: var(--components-main-color);
+		font-size: 2rem;
+		cursor: pointer;
+		transition: color 0.3s;
+
+		&:hover {
+			color: #cbcbda;
+		}
+	}
+	&__header {
+		font-size: 1.35rem;
+	}
+	&__time {
+		margin-inline-start: 2em;
+		color: var(--components-main-color);
+	}
+	&__author {
+		margin-block-start: 1em;
+		color: var(--components-main-color);
+	}
+	&__link {
+		margin-block-start: 1.5em;
+		display: block;
+		text-align: center;
+		text-decoration: none;
+		color: #2dbce7;
+		font-size: 1.4rem;
+		font-weight: 500;
+
+		&:hover {
+			text-decoration: underline;
+		}
+	}
+}
+
 .progress-ring {
 	display: flex;
 	justify-content: center;
@@ -475,5 +568,25 @@ main {
 	to {
 		transform: translate(-50%, -50%) scale(1);
 		opacity: 0;
+	}
+}
+@keyframes messagesAnimation {
+	from {
+		opacity: 0;
+		transform: scale(0);
+	}
+	to {
+		opacity: 1;
+		transform: scale(1);
+	}
+}
+@keyframes messagesHideAnimation {
+	from {
+		opacity: 1;
+		transform: scale(1);
+	}
+	to {
+		opacity: 0;
+		transform: scale(0);
 	}
 }
