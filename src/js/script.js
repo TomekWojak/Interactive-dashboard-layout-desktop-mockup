@@ -80,9 +80,8 @@ document.addEventListener("DOMContentLoaded", function () {
 			column.classList.add("statistics__column");
 			tooltip.classList.add("statistics__tooltip");
 
-			tooltip.textContent = `Total revenue: $${Math.floor(
-				Math.random() * 80 + 20
-			)}00`;
+			const randomNumber = Math.floor(Math.random() * 80 + 20);
+			tooltip.textContent = `Total revenue: $${randomNumber}00`;
 			tooltip.style.opacity = 0;
 
 			monthName.textContent = months[i];
@@ -90,29 +89,25 @@ document.addEventListener("DOMContentLoaded", function () {
 			box.append(column);
 			box.append(tooltip);
 
+			setTimeout(() => {
+				column.style.height = randomNumber + "px";
+			}, 100);
+
 			box.append(monthName);
 			chart.append(box);
 
-			handleTooltips(box, tooltip);
-		}
-		const allColumns = Array.from(
-			document.getElementsByClassName("statistics__column")
-		);
-		if (allColumns) {
-			setTimeout(() => {
-				allColumns.forEach((column) => {
-					const colHeight = Math.floor(Math.random() * 80 + 20);
-					column.style.height = colHeight + "px";
-				});
-			}, 100);
+			handleTooltips(column, tooltip);
 		}
 	};
 
-	const handleTooltips = (box, tooltip) => {
-		box.addEventListener("mouseover", () => {
+	const handleTooltips = (column, tooltip) => {
+		column.addEventListener("mouseover", (e) => {
+			const position = Math.floor(Math.random() * 20)
+			tooltip.style.top = position - e.clientY / 10 + "px";
+			tooltip.style.left = position - e.clientX / 10+ "px";
 			tooltip.style.opacity = 1;
 		});
-		box.addEventListener("mouseleave", () => {
+		column.addEventListener("mouseleave", () => {
 			tooltip.style.opacity = 0;
 		});
 	};
