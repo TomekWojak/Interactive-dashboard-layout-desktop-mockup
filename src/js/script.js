@@ -16,12 +16,66 @@ document.addEventListener("DOMContentLoaded", function () {
 		"Nov",
 		"Dec",
 	];
+	const notificationsData = [
+		{
+			message: "Welcome to your dashboard!",
+			time: "1 hour ago",
+			from: "System",
+		},
+		{
+			message: "You have 2 new messages",
+			time: "1 hour ago",
+			from: "Nick J.",
+		},
+		{
+			message: "Your report is ready to download",
+			time: "2 hours ago",
+			from: "System",
+		},
+		{
+			message: "First steps in the Dashboard",
+			time: "3 hours ago",
+			from: "Jerry from Dashboard",
+		},
+		{
+			message: "Update: Dashboard v2.1",
+			time: "4 hours ago",
+			from: "System",
+		},
+		{
+			message: "New payment: +$1,200 PayPal",
+			time: "4 hour ago",
+			from: "System",
+		},
+		{
+			message: "The transfer has been completed",
+			time: "4 hours ago",
+			from: "John D",
+		},
+		{
+			message: "Reminder: Rebalance portfolio",
+			time: "5 hours ago",
+			from: "System",
+		},
+		{
+			message: "New: Analytics in PRO!",
+			time: "6 hour ago",
+			from: "Daniel from Dashboard",
+		},
+		{
+			message: "Contact details confirmation",
+			time: "8 hour ago",
+			from: "Support Team",
+		},
+	];
 	const CIRCLE_DASHARR = 314;
 	const messagesPanel = document.querySelector(".notifications-box");
 	const headerPanel = document.querySelector(".header__panel");
 	const closeHeaderPanelBtn = document.querySelector(
 		".notifications-box__close"
 	);
+	const notificationsBox = document.querySelector(".notifications-box");
+	const notificationsBell = document.querySelector(".header__btn--bell");
 
 	const handleNavLinks = (e) => {
 		e.preventDefault();
@@ -32,8 +86,6 @@ document.addEventListener("DOMContentLoaded", function () {
 		console.log(e.target);
 		if (e.target.matches(".header__btn--bell")) {
 			showMsgPanel();
-		} else {
-			console.log("s");
 		}
 	};
 	const showMsgPanel = () => {
@@ -47,6 +99,30 @@ document.addEventListener("DOMContentLoaded", function () {
 			messagesPanel.classList.remove("hidden");
 		}, 300);
 	};
+
+	const createNotifications = () => {
+		const notificationsBody = document.querySelector(
+			".notifications-box__body"
+		);
+		const arr = [];
+
+		for (let i = 0; i < notificationsData.length; i++) {
+			const num = Math.floor(Math.random() * notificationsData.length);
+			if (arr.includes(num)) return;
+			arr.push(num);
+			const notification = document.createElement("div");
+			notification.classList.add("notifications-box__notification");
+
+			notification.innerHTML = `<div class="notifications-box__head">
+                            <span class="notifications-box__header">${notificationsData[num].message}</span>
+                            <span class="notifications-box__time">${notificationsData[num].time}</span>
+                        </div>
+                        <p class="notifications-box__author">${notificationsData[num].from}</p>`;
+
+			notificationsBody.append(notification);
+		}
+	};
+
 	const handleRingStats = () => {
 		const rings = [
 			document.querySelector(".progress-ring__progress"),
@@ -123,6 +199,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 			handleTooltips(column, tooltip);
 		}
+		createNotifications();
 	};
 
 	const handleTooltips = (column, tooltip) => {
@@ -139,6 +216,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
 	handleRingStats();
 	createColumns();
+	window.addEventListener("click", (e) => {
+		if (
+			e.target !== notificationsBell &&
+			notificationsBox.classList.contains("active")
+		) {
+			hideMsgPanel();
+		}
+	});
 	closeHeaderPanelBtn.addEventListener("click", hideMsgPanel);
 	headerPanel.addEventListener("click", handleHeaderPanel);
 	links.forEach((link) => link.addEventListener("click", handleNavLinks));

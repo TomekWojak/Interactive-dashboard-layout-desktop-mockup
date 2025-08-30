@@ -93,6 +93,7 @@ body {
 		}
 	}
 	&__btn {
+		position: relative;
 		display: flex;
 		justify-content: center;
 		align-items: center;
@@ -141,6 +142,16 @@ body {
 					transparent
 				);
 			}
+		}
+		&--bell::before {
+			content: "";
+			position: absolute;
+			right: 7px;
+			top: 5px;
+			width: 7px;
+			height: 7px;
+			border-radius: 50%;
+			background-color: rgb(253, 59, 39);
 		}
 	}
 }
@@ -327,11 +338,11 @@ main {
 
 	&.active {
 		display: block;
-		animation: messagesAnimation 0.5s forwards;
+		animation: messagesAnimation 0.3s forwards ease-out;
 	}
 	&.hidden {
 		display: block;
-		animation: messagesHideAnimation 0.3s forwards;
+		animation: messagesHideAnimation 0.3s forwards ease-out;
 	}
 
 	&__head {
@@ -341,7 +352,23 @@ main {
 	}
 	&__body {
 		margin-block-start: 2em;
+		max-height: 31rem;
+		overflow-y: auto;
 	}
+	&__body::-webkit-scrollbar {
+		width: 0;
+	}
+	// &__body::-webkit-scrollbar-track {
+	// 	border-radius: 10px;
+	// 	background: #292a32;
+	// }
+	// &__body::-webkit-scrollbar-thumb {
+	// 	background: #2dbce7;
+	// 	border-radius: 10px;
+	// }
+	// &__body::-webkit-scrollbar-thumb:hover {
+	// 	background: #1d9ec5;
+	// }
 	&__title {
 		font-size: 2rem;
 		font-weight: 500;
