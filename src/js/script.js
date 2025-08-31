@@ -81,6 +81,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		document.querySelector(".header__btn--search-engine"),
 		document.querySelector(".header__pro-subscribtion-btn"),
 	];
+	const userPanel = document.querySelector(".user-panel");
 	const searchInput = document.querySelector(".header__input");
 	const handleNavLinks = (e) => {
 		e.preventDefault();
@@ -92,6 +93,8 @@ document.addEventListener("DOMContentLoaded", function () {
 			showMsgPanel();
 		} else if (e.target.matches(".header__btn--search-engine")) {
 			handleSearchInput();
+		} else if (e.target.matches(".header__btn--user")) {
+			showUserPanel();
 		}
 	};
 	const handleSearchInput = () => {
@@ -108,15 +111,17 @@ document.addEventListener("DOMContentLoaded", function () {
 		messagesPanel.classList.add("active");
 		bellDot.classList.remove("visible");
 	};
-	const hideMsgPanel = () => {
-		messagesPanel.classList.add("hidden");
-		messagesPanel.classList.remove("active");
+	const hidePanel = (panel) => {
+		panel.classList.add("hidden");
+		panel.classList.remove("active");
 
 		setTimeout(() => {
-			messagesPanel.classList.remove("hidden");
+			panel.classList.remove("hidden");
 		}, 300);
 	};
-
+	const showUserPanel = () => {
+		userPanel.classList.toggle("active");
+	};
 	const createNotifications = () => {
 		const notificationsBody = document.querySelector(
 			".notifications-box__body"
@@ -246,7 +251,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			e.target !== notificationsBell &&
 			notificationsBox.classList.contains("active")
 		) {
-			hideMsgPanel();
+			hidePanel(messagesPanel);
 		}
 	});
 	window.addEventListener("click", (e) => {
@@ -254,7 +259,19 @@ document.addEventListener("DOMContentLoaded", function () {
 			hideSearcher();
 		}
 	});
-	closeHeaderPanelBtn.addEventListener("click", hideMsgPanel);
+	window.addEventListener("click", (e) => {
+		if (
+			!userPanel.contains(e.target) &&
+			!e.target.matches(".header__btn--user") &&
+			userPanel.classList.contains("active")
+		) {
+			hidePanel(userPanel);
+		}
+	});
+
+	closeHeaderPanelBtn.addEventListener("click", () => {
+		hidePanel(messagesPanel);
+	});
 	headerPanel.addEventListener("click", handleHeaderPanel);
 	links.forEach((link) => link.addEventListener("click", handleNavLinks));
 	reportBtn.addEventListener("click", btnClickAnimation);
