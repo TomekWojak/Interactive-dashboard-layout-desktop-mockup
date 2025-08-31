@@ -74,22 +74,39 @@ document.addEventListener("DOMContentLoaded", function () {
 	const closeHeaderPanelBtn = document.querySelector(
 		".notifications-box__close"
 	);
+	const bellDot = document.querySelector(".dot");
 	const notificationsBox = document.querySelector(".notifications-box");
 	const notificationsBell = document.querySelector(".header__btn--bell");
-
+	const headerBtns = [
+		document.querySelector(".header__btn--search-engine"),
+		document.querySelector(".header__pro-subscribtion-btn"),
+	];
+	const searchInput = document.querySelector(".header__input");
 	const handleNavLinks = (e) => {
 		e.preventDefault();
 		links.forEach((link) => link.classList.remove("active"));
 		e.target.classList.add("active");
 	};
 	const handleHeaderPanel = (e) => {
-		console.log(e.target);
 		if (e.target.matches(".header__btn--bell")) {
 			showMsgPanel();
+		} else if (e.target.matches(".header__btn--search-engine")) {
+			handleSearchInput();
 		}
+	};
+	const handleSearchInput = () => {
+		searchInput.value = "";
+		headerBtns.forEach((btn) => btn.classList.toggle("btn-moved"));
+		searchInput.classList.toggle("active");
+	};
+	const hideSearcher = () => {
+		searchInput.value = "";
+		headerBtns.forEach((btn) => btn.classList.remove("btn-moved"));
+		searchInput.classList.remove("active");
 	};
 	const showMsgPanel = () => {
 		messagesPanel.classList.add("active");
+		bellDot.classList.remove("visible");
 	};
 	const hideMsgPanel = () => {
 		messagesPanel.classList.add("hidden");
@@ -108,6 +125,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
 		for (let i = 0; i < notificationsData.length; i++) {
 			const num = Math.floor(Math.random() * notificationsData.length);
+			if (num !== 0) {
+				setTimeout(() => {
+					bellDot.classList.add("visible");
+				}, 300);
+			} else {
+				bellDot.classList.remove("visible");
+			}
 			if (arr.includes(num)) return;
 			arr.push(num);
 			const notification = document.createElement("div");
@@ -218,10 +242,16 @@ document.addEventListener("DOMContentLoaded", function () {
 	createColumns();
 	window.addEventListener("click", (e) => {
 		if (
+			!notificationsBox.contains(e.target) &&
 			e.target !== notificationsBell &&
 			notificationsBox.classList.contains("active")
 		) {
 			hideMsgPanel();
+		}
+	});
+	window.addEventListener("click", (e) => {
+		if (e.target !== headerBtns[0] && e.target !== searchInput) {
+			hideSearcher();
 		}
 	});
 	closeHeaderPanelBtn.addEventListener("click", hideMsgPanel);

@@ -41,6 +41,35 @@ body {
 	background-color: var(--main-color);
 	z-index: 1000;
 
+	&__input-box {
+		position: relative;
+	}
+	&__input {
+		position: absolute;
+		top: 50%;
+		transform: translateY(-50%) translateX(calc(-100% + 40px)) scale(0);
+		transform-origin: right;
+		width: 30rem;
+		padding: 1em 3em;
+		border-radius: 30px;
+		font-family: inherit;
+		border: none;
+		background-color: var(--card-color);
+		color: #fff;
+		transition: transform 0.2s;
+
+		&::placeholder {
+			color: var(--components-main-color);
+		}
+		&:focus-visible {
+			outline: 1px solid var(--accent);
+		}
+		&.active {
+			transform: translateY(-50%) translateX(calc(-100% + 40px)) scale(1);
+			transition: transform 0.3s;
+		}
+	}
+
 	&__logo {
 		text-decoration: none;
 		color: var(--components-main-color);
@@ -71,10 +100,12 @@ body {
 		background: linear-gradient(90deg, #8b5cf6, #ec4899, #f97316);
 		font-weight: 600;
 		font-size: 1.3rem;
+		transition: transform 0.3s;
 
 		i {
 			color: gold;
 			margin-inline-end: 0.3em;
+			pointer-events: none;
 		}
 		&:hover::before {
 			opacity: 0.5;
@@ -143,17 +174,28 @@ body {
 				);
 			}
 		}
-		&--bell::before {
-			content: "";
+		&--bell .dot {
 			position: absolute;
 			right: 7px;
 			top: 5px;
 			width: 7px;
 			height: 7px;
 			border-radius: 50%;
+			transform: scale(0);
 			background-color: rgb(253, 59, 39);
+			transition: transform 0.3s;
+
+			&.visible {
+				animation: scale 0.5s forwards;
+			}
+		}
+		&--search-engine {
+			transition: transform 0.3s;
 		}
 	}
+}
+.btn-moved {
+	transform: translateX(-260px);
 }
 
 .aside {
@@ -615,5 +657,16 @@ main {
 	to {
 		opacity: 0;
 		transform: scale(0);
+	}
+}
+@keyframes scale {
+	0% {
+		transform: scale(0);
+	}
+	50% {
+		transform: scale(1.15);
+	}
+	100% {
+		transform: scale(1);
 	}
 }
