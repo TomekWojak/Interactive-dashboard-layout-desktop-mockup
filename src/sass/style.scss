@@ -365,7 +365,8 @@ main {
 	}
 }
 .notifications-box,
-.user-panel {
+.user-panel,
+.tasks {
 	position: fixed;
 	display: none;
 	opacity: 0;
@@ -509,6 +510,50 @@ main {
 			text-decoration: underline;
 		}
 	}
+}
+
+.tasks {
+	display: flex;
+	opacity: 1;
+	transform: scale(1);
+	min-width: 30rem;
+	flex-direction: column;
+	padding: 3em 2em;
+
+	&__list {
+		list-style-type: none;
+	}
+	&__task {
+		display: flex;
+		align-items: center;
+		gap: 1.5em;
+		font-size: 1.35rem;
+
+		i {
+			font-size: 2rem;
+			color: var(--accent);
+		}
+	}
+	&__progress-box {
+		position: relative;
+		margin-block-start: 1em;
+		width: 100%;
+		height: 7px;
+		background-color: var(--card-color);
+		border-radius: 30px;
+	}
+	&__progress-bar {
+		position: absolute;
+		width: 50%;
+		height: 100%;
+		border-radius: inherit;
+		background-color: var(--accent);
+	}
+	// &__target {
+	// 	display: block;
+	// 	margin-inline-start: auto;
+	// 	text-align: center;
+	// }
 }
 
 .progress-ring {
