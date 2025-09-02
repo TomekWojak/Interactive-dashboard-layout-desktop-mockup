@@ -369,7 +369,7 @@ main {
 .user-panel,
 .tasks {
 	position: fixed;
-	display: none;
+	visibility: hidden;
 	opacity: 0;
 	transform: scale(0);
 	right: 2em;
@@ -426,10 +426,12 @@ main {
 }
 .user-panel.active {
 	display: flex;
+	visibility: visible;
 	animation: messagesAnimation 0.3s forwards ease-out;
 }
 .user-panel.hidden {
 	display: flex;
+	visibility: visible;
 	animation: messagesHideAnimation 0.3s forwards ease-out;
 }
 .notifications-box {
@@ -438,10 +440,12 @@ main {
 
 	&.active {
 		display: block;
+		visibility: visible;
 		animation: messagesAnimation 0.3s forwards ease-out;
 	}
 	&.hidden {
 		display: block;
+		visibility: visible;
 		animation: messagesHideAnimation 0.3s forwards ease-out;
 	}
 
@@ -514,12 +518,22 @@ main {
 }
 
 .tasks {
-	display: flex;
 	opacity: 1;
 	transform: scale(1);
 	min-width: 30rem;
 	flex-direction: column;
 	padding: 3em 2em;
+
+	&.active {
+		display: flex;
+		visibility: visible;
+		animation: messagesAnimation 0.3s forwards ease-out;
+	}
+	&.hidden {
+		display: flex;
+		visibility: visible;
+		animation: messagesHideAnimation 0.3s forwards ease-out;
+	}
 
 	&__list {
 		list-style-type: none;
@@ -554,7 +568,7 @@ main {
 		height: 100%;
 		border-radius: inherit;
 		background-color: var(--accent);
-		transition: width .3s;
+		transition: width 0.3s;
 	}
 	&__status {
 		position: relative;
@@ -566,10 +580,9 @@ main {
 			position: absolute;
 			left: 50%;
 			top: 50%;
-			transform: translate(-50%, -50%);
+			transform: translate(-50%, -50%) scale(0);
 			font-size: 1.6rem;
 			color: var(--accent);
-			transform: scale(0);
 
 			&.visible {
 				display: block;
@@ -792,13 +805,13 @@ main {
 }
 @keyframes done {
 	0% {
-		transform: scale(0);
+		transform: translate(-50%, -50%) scale(0);
 	}
 	50% {
-		transform: scale(1.1);
+		transform: translate(-50%, -50%) scale(1.1);
 	}
 	100% {
-		transform: scale(1);
+		transform: translate(-50%, -50%) scale(1);
 	}
 }
 @keyframes hiding {

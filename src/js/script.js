@@ -98,7 +98,12 @@ document.addEventListener("DOMContentLoaded", function () {
 			showUserPanel();
 		} else if (e.target.matches(".header__pro-subscribtion-btn")) {
 			handleTasks(e.target);
+		} else if (e.target.matches(".header__btn--tasks")) {
+			showTasks();
 		}
+	};
+	const showTasks = () => {
+		tasks.classList.add("active");
 	};
 	const handleSearchInput = () => {
 		searchInput.value = "";
@@ -147,7 +152,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		progressBar.style.width = (dividend / tasksNum) * taskProgressNum + "%";
 	};
 	const handleTaksState = (currTask, tasksTarget, tasksNum) => {
-		let taskProgressNum = parseInt(currTask.dataset.number)
+		let taskProgressNum = parseInt(currTask.dataset.number);
 
 		if (taskProgressNum >= tasksNum) return;
 
@@ -155,8 +160,20 @@ document.addEventListener("DOMContentLoaded", function () {
 
 		const tasksStatus = currTask.querySelector(".tasks__status");
 		tasksTarget.textContent = `${taskProgressNum} / ${tasksNum}`;
+		hideTarget(tasksTarget);
+		showIfChecked(tasksStatus);
 	};
-
+	const hideTarget = (tasksTarget) => {
+		setTimeout(() => {
+			tasksTarget.classList.add("hidden");
+		}, 300);
+	};
+	const showIfChecked = (tasksStatus) => {
+		const checkIcon = tasksStatus.querySelector("i");
+		setTimeout(() => {
+			checkIcon.classList.add("visible");
+		}, 600);
+	};
 	const updateTaskNumber = (currTask) => {
 		let num = currTask.dataset.number;
 		num++;
@@ -300,6 +317,16 @@ document.addEventListener("DOMContentLoaded", function () {
 	window.addEventListener("click", (e) => {
 		if (e.target !== headerBtns[0] && e.target !== searchInput) {
 			hideSearcher();
+		}
+	});
+	window.addEventListener("click", (e) => {
+		if (
+			e.target !== tasks &&
+			!tasks.contains(e.target) &&
+			!e.target.matches(".header__btn--tasks") &&
+			tasks.classList.contains("active")
+		) {
+			hidePanel(tasks);
 		}
 	});
 	window.addEventListener("click", (e) => {
