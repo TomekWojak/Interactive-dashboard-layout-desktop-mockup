@@ -74,6 +74,7 @@ document.addEventListener("DOMContentLoaded", function () {
 	const closeHeaderPanelBtn = document.querySelector(
 		".notifications-box__close"
 	);
+	const tasks = document.querySelector(".tasks");
 	const bellDot = document.querySelector(".dot");
 	const notificationsBox = document.querySelector(".notifications-box");
 	const notificationsBell = document.querySelector(".header__btn--bell");
@@ -95,6 +96,8 @@ document.addEventListener("DOMContentLoaded", function () {
 			handleSearchInput();
 		} else if (e.target.matches(".header__btn--user")) {
 			showUserPanel();
+		} else if (e.target.matches(".header__pro-subscribtion-btn")) {
+			handleTasks(e.target);
 		}
 	};
 	const handleSearchInput = () => {
@@ -120,8 +123,48 @@ document.addEventListener("DOMContentLoaded", function () {
 		}, 300);
 	};
 	const showUserPanel = () => {
-		userPanel.classList.toggle("active");
+		userPanel.classList.add("active");
 	};
+
+	// START of TASKS MANAGER
+
+	function handleTasks(el) {
+		const elementData = el.dataset.name;
+		const currentTask = tasks.querySelector(`[data-name="${elementData}"]`);
+
+		setProgressBarWidth(currentTask);
+	}
+
+	const setProgressBarWidth = (currTask) => {
+		const dividend = 100;
+		const tasksTarget = currTask.querySelector(".tasks__target");
+		const tasksNum = parseInt(tasksTarget.textContent.slice(4));
+		const progressBar = currTask.querySelector(".tasks__progress-bar");
+
+		handleTaksState(currTask, tasksTarget, tasksNum);
+
+		let taskProgressNum = parseInt(currTask.dataset.number);
+		progressBar.style.width = (dividend / tasksNum) * taskProgressNum + "%";
+	};
+	const handleTaksState = (currTask, tasksTarget, tasksNum) => {
+		let taskProgressNum = parseInt(currTask.dataset.number)
+
+		if (taskProgressNum >= tasksNum) return;
+
+		taskProgressNum = updateTaskNumber(currTask);
+
+		const tasksStatus = currTask.querySelector(".tasks__status");
+		tasksTarget.textContent = `${taskProgressNum} / ${tasksNum}`;
+	};
+
+	const updateTaskNumber = (currTask) => {
+		let num = currTask.dataset.number;
+		num++;
+		currTask.dataset.number = num;
+		return num;
+	};
+
+	// END of TASKS MANAGER
 	const createNotifications = () => {
 		const notificationsBody = document.querySelector(
 			".notifications-box__body"

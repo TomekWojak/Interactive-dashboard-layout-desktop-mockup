@@ -18,7 +18,8 @@
     <header class="header">
         <a href="/" class="header__logo"><i class="fa-regular fa-file"></i> Dashboard</a>
         <div class="header__panel">
-            <button class="header__pro-subscribtion-btn"><i class="fa-solid fa-crown"></i> Get PRO</button>
+            <button class="header__pro-subscribtion-btn" data-name="get-pro"><i class="fa-solid fa-crown"></i> Get
+                PRO</button>
             <div class="header__input-box">
                 <input type="text" placeholder="Search..." class="header__input">
                 <button class="header__btn header__btn--search-engine"><i
@@ -132,12 +133,33 @@
 
             <div class="tasks">
                 <ul class="tasks__list">
-                    <li class="tasks__task">
-                        <i class="fa-solid fa-check"></i>
+                    <li class="tasks__task" data-name="get-pro" data-number="0">
                         <div class="tasks__task-info"> <span class="tasks__task-text">Buy PRO to unlock all
                                 features</span>
                             <div class="tasks__progress-box"><span class="tasks__progress-bar"></span></div>
-                            <span class="tasks__target">0 / 1</span>
+                            <div class="tasks__status">
+                                <span class="tasks__target">0 / 1</span>
+                                <i class="fa-solid fa-check"></i>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="tasks__task" data-name="first-transaction" data-number="0">
+                        <div class="tasks__task-info"> <span class="tasks__task-text">Add your first transaction</span>
+                            <div class="tasks__progress-box"><span class="tasks__progress-bar"></span></div>
+                            <div class="tasks__status">
+                                <span class="tasks__target">0 / 1</span>
+                                <i class="fa-solid fa-check"></i>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="tasks__task" data-name="card-details" data-number="0">
+                        <div class="tasks__task-info"> <span class="tasks__task-text">Complete your payment card
+                                details</span>
+                            <div class="tasks__progress-box"><span class="tasks__progress-bar"></span></div>
+                            <div class="tasks__status">
+                                <span class="tasks__target">0 / 1</span>
+                                <i class="fa-solid fa-check"></i>
+                            </div>
                         </div>
                     </li>
                 </ul>
