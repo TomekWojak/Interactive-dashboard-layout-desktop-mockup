@@ -3,6 +3,9 @@
 <br>
 <br>
 This is an **interactive mockup** built for portfolio purposes.
+<br>
+<br>
+Link: https://tomekwojak.github.io/Interactive-dashboard-layout-desktop-mockup/
 
 The application simulates: 
 - notifications, randomly generated charts on refresh,
