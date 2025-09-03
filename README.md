@@ -8,7 +8,7 @@ The application simulates:
 - notifications, randomly generated charts on refresh,
 - UI interactions (Pro subscribtion, progress circle, task completion, etc.).
 
-The application will simulate
+The application will simulate (*in the future*)
 - login (frontend only),
 - subscription plan selection (mock flow, no backend),
 - user status changes (e.g., `Free` → `Pro User`),
