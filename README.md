@@ -13,6 +13,7 @@ The application will simulate
 - subscription plan selection (mock flow, no backend),
 - user status changes (e.g., `Free` → `Pro User`),
 - ability to add transactions,
+- kind of search engine
 
 
 For now I only made a version for laptops. I am gradually adding functionality, if I can make it into something like a primitive finance app - I will also make a mobile version.
