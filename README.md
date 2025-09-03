@@ -1,4 +1,4 @@
-💳 FinanceApp Mockup<br>
+💳 FinanceApp Mockup<br><br>
 ⚠️ **Note**: This is not a real finance app.
 <br>
 <br>
