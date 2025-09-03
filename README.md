@@ -1,8 +1,19 @@
-💳 FinanceApp Mockup
+💳 FinanceApp Mockup<br>
 ⚠️ **Note**: This is not a real finance app.
 <br>
 <br>
 This is an **interactive mockup** built for portfolio purposes.
+
+The application simulates: 
+- notifications, randomly generated charts on refresh,
+- UI interactions (Pro subscribtion, progress circle, task completion, etc.).
+
+The application will simulate
+- login (frontend only),
+- subscription plan selection (mock flow, no backend),
+- user status changes (e.g., `Free` → `Pro User`),
+- ability to add transactions,
+
 
 For now I only made a version for laptops. I am gradually adding functionality, if I can make it into something like a primitive finance app - I will also make a mobile version.
 <br><br>
