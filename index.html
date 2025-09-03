@@ -15,158 +15,172 @@
 </head>
 
 <body>
-    <header class="header">
-        <a href="/" class="header__logo"><i class="fa-regular fa-file"></i> Dashboard</a>
-        <div class="header__panel">
-            <button class="header__pro-subscribtion-btn" data-name="get-pro"><i class="fa-solid fa-crown"></i> Get
-                PRO</button>
-            <div class="header__input-box">
-                <input type="text" placeholder="Search..." class="header__input">
-                <button class="header__btn header__btn--search-engine"><i
-                        class="fa-solid fa-magnifying-glass"></i></button>
-            </div>
-            <button class="header__btn header__btn--bell"><span class="dot"></span><i
-                    class="fa-regular fa-bell"></i></button>
-            <button class="header__btn header__btn--tasks"><i class="fa-solid fa-bars-progress"></i></button>
-            <button class="header__btn header__btn--user"><i class="fa-regular fa-user"></i></button>
-        </div>
-    </header>
-    <aside class="aside">
-        <nav class="nav">
-            <ul class="nav__links">
-                <li class="nav__li"><a href="#" class="nav__link"><i class="fa-solid fa-house"></i> Home</a></li>
-                <li class="nav__li"><a href="#" class="nav__link"><i class="fa-regular fa-message"></i> Messages</a>
-                </li>
-                <li class="nav__li"><a href="#" class="nav__link"><i class="fa-solid fa-headset"></i> Support</a></li>
-                <li class="nav__li"><a href="#" class="nav__link"><i class="fa-solid fa-gear"></i> Settings</a></li>
-            </ul>
-        </nav>
-        <div class="aside__user-box">
-            <div class="aside__user"><i class="fa-regular fa-user"></i></div>
-            <div class="aside__user-info">
-                <p class="aside__user-name">Jane Doe</p>
-                <p class="aside__user-location">Poland</p>
-            </div>
-            <div class="aside__user-plan-status">Free</div>
-        </div>
-    </aside>
-    <main>
-        <div class="container">
-            <div class="statistics">
-                <h2 class="statistics__title title">Total Revenue</h2>
-                <div class="statistics__chart">
-
-
+    <div class="login-page">
+        <form class="login-page__container">
+            <span class="login-page__text">Login</span>
+            <input type="text" class="login-page__input login-page__input--username" placeholder="Username">
+            <input type="password" class="login-page__input login-page__input--password" placeholder="Password">
+            <p class="error-info"></p>
+            <button class="login-page__login-btn">Sign in</button>
+            <a href="/" class="login-page__pass-forgotten">Forgot password?</a>
+        </form>
+    </div>
+    <div class="dashboard">
+        <header class="header">
+            <a href="/" class="header__logo"><i class="fa-regular fa-file"></i> Dashboard</a>
+            <div class="header__panel">
+                <button class="header__pro-subscribtion-btn" data-name="get-pro"><i class="fa-solid fa-crown"></i> Get
+                    PRO</button>
+                <div class="header__input-box">
+                    <input type="text" placeholder="Search..." class="header__input">
+                    <button class="header__btn header__btn--search-engine"><i
+                            class="fa-solid fa-magnifying-glass"></i></button>
                 </div>
+                <button class="header__btn header__btn--bell"><span class="dot"></span><i
+                        class="fa-regular fa-bell"></i></button>
+                <button class="header__btn header__btn--tasks"><i class="fa-solid fa-bars-progress"></i></button>
+                <button class="header__btn header__btn--user"><i class="fa-regular fa-user"></i></button>
             </div>
-            <div class="progress-ring">
-                <svg class="progress-ring" viewBox="0 0 120 120" width="250" height="250">
-                    <defs>
-                        <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
-                            <stop offset="0%" stop-color="#9333ea" />
-                            <stop offset="100%" stop-color="#4f46e5" />
-                        </linearGradient>
-                    </defs>
-                    <circle class="progress-ring__progress-bg" cx="60" cy="60" r="50" />
-                    <circle class="progress-ring__bg" cx="60" cy="60" r="50" />
-                    <circle class="progress-ring__progress" cx="60" cy="60" r="50" />
-
-                    <text x="50%" y="50%" text-anchor="middle" dominant-baseline="middle" class="progress-text">
-                        <tspan x="50%" dy="-0.3em" font-size="16">$63,450</tspan>
-                        <tspan x="50%" dy="2em" font-size="9">/ $100,000</tspan>
-                    </text>
-                </svg>
-            </div>
-            <div class="earnings">
-                <h2 class="earnings__title title">Earnings</h2>
-                <span class="earnings__price">$63,450</span>
-            </div>
-            <div class="sales">
-                <h2 class="sales__title title">Sales</h2>
-                <span class="sales__price">3,400</span>
-            </div>
-
-
-            <div class="activity">
-                <h2 class="activity__title title">Recent Activity</h2>
-                <ul class="activity__list">
-                    <li class="activity__li">Bought Apple shares – 10 pcs at $172.30</li>
-                    <li class="activity__li">Sold Tesla shares – 5 pcs at $710.50</li>
-                    <li class="activity__li">Dividend received – Microsoft, +$25</li>
-                    <li class="activity__li">Portfolio rebalanced – +15% Healthcare sector</li>
-                    <li class="activity__li">Sold NVIDIA shares – 12 pcs at $625.75</li>
-                    <li class="activity__li">Bought Amazon shares – 8 pcs at $135.20</li>
-                </ul>
-            </div>
-
-            <div class="report">
-                <h2 class="report__title">Boost Your Growth <i class="fa-solid fa-rocket"></i></h2>
-                <p class="report__text">Generate a detailed report and track your progress instantly.</p>
-                <button class="report__btn">Generate Report
-                </button>
-            </div>
-
-            <div class="notifications-box">
-                <div class="notifications-box__head">
-                    <p class="notifications-box__title">Notifications</p>
-                    <button class="notifications-box__close"><i class="fa-solid fa-xmark"></i></button>
-                </div>
-                <div class="notifications-box__body">
-
-                </div>
-                <a href="/" class="notifications-box__link">See all notifications</a>
-            </div>
-
-            <div class="user-panel">
-                <div class="user-panel__head">
-                    <p class="user-panel__id">User ID: <span class="id">#j5e_dk1</span></p>
-                </div>
-                <hr>
-                <ul class="user-panel__list">
-                    <li class="user__panel-li"><a href="/" class="user-panel__link">Profile</a></li>
-                    <li class="user-panel__li"><a href="/" class="user-panel__link">Help</a></li>
-                    <li class="user-panel__li"><a href="/" class="user-panel__link">Insights</a></li>
-                    <li class="user-panel__li"><a href="/" class="user-panel__link">Log out <i
-                                class="fa-solid fa-arrow-right-from-bracket"></i></a></li>
-                </ul>
-            </div>
-
-            <div class="tasks">
-                <ul class="tasks__list">
-                    <li class="tasks__task" data-name="get-pro" data-number="0">
-                        <div class="tasks__task-info"> <span class="tasks__task-text">Buy PRO to unlock all
-                                features</span>
-                            <div class="tasks__progress-box"><span class="tasks__progress-bar"></span></div>
-                            <div class="tasks__status">
-                                <span class="tasks__target">0 / 1</span>
-                                <i class="fa-solid fa-check"></i>
-                            </div>
-                        </div>
+        </header>
+        <aside class="aside">
+            <nav class="nav">
+                <ul class="nav__links">
+                    <li class="nav__li"><a href="#" class="nav__link"><i class="fa-solid fa-house"></i> Home</a></li>
+                    <li class="nav__li"><a href="#" class="nav__link"><i class="fa-regular fa-message"></i> Messages</a>
                     </li>
-                    <li class="tasks__task" data-name="first-transaction" data-number="0">
-                        <div class="tasks__task-info"> <span class="tasks__task-text">Add your first transaction</span>
-                            <div class="tasks__progress-box"><span class="tasks__progress-bar"></span></div>
-                            <div class="tasks__status">
-                                <span class="tasks__target">0 / 1</span>
-                                <i class="fa-solid fa-check"></i>
-                            </div>
-                        </div>
+                    <li class="nav__li"><a href="#" class="nav__link"><i class="fa-solid fa-headset"></i> Support</a>
                     </li>
-                    <li class="tasks__task" data-name="card-details" data-number="0">
-                        <div class="tasks__task-info"> <span class="tasks__task-text">Complete your payment card
-                                details</span>
-                            <div class="tasks__progress-box"><span class="tasks__progress-bar"></span></div>
-                            <div class="tasks__status">
-                                <span class="tasks__target">0 / 1</span>
-                                <i class="fa-solid fa-check"></i>
-                            </div>
-                        </div>
-                    </li>
+                    <li class="nav__li"><a href="#" class="nav__link"><i class="fa-solid fa-gear"></i> Settings</a></li>
                 </ul>
+            </nav>
+            <div class="aside__user-box">
+                <div class="aside__user"><i class="fa-regular fa-user"></i></div>
+                <div class="aside__user-info">
+                    <p class="aside__user-name">Jane Doe</p>
+                    <p class="aside__user-location">Poland</p>
+                </div>
+                <div class="aside__user-plan-status">Free</div>
             </div>
+        </aside>
+        <main>
+            <div class="container">
+                <div class="statistics">
+                    <h2 class="statistics__title title">Total Revenue</h2>
+                    <div class="statistics__chart">
 
-        </div>
-    </main>
+
+                    </div>
+                </div>
+                <div class="progress-ring">
+                    <svg class="progress-ring" viewBox="0 0 120 120" width="250" height="250">
+                        <defs>
+                            <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" stop-color="#9333ea" />
+                                <stop offset="100%" stop-color="#4f46e5" />
+                            </linearGradient>
+                        </defs>
+                        <circle class="progress-ring__progress-bg" cx="60" cy="60" r="50" />
+                        <circle class="progress-ring__bg" cx="60" cy="60" r="50" />
+                        <circle class="progress-ring__progress" cx="60" cy="60" r="50" />
+
+                        <text x="50%" y="50%" text-anchor="middle" dominant-baseline="middle" class="progress-text">
+                            <tspan x="50%" dy="-0.3em" font-size="16">$63,450</tspan>
+                            <tspan x="50%" dy="2em" font-size="9">/ $100,000</tspan>
+                        </text>
+                    </svg>
+                </div>
+                <div class="earnings">
+                    <h2 class="earnings__title title">Earnings</h2>
+                    <span class="earnings__price">$63,450</span>
+                </div>
+                <div class="sales">
+                    <h2 class="sales__title title">Sales</h2>
+                    <span class="sales__price">3,400</span>
+                </div>
+
+
+                <div class="activity">
+                    <h2 class="activity__title title">Recent Activity</h2>
+                    <ul class="activity__list">
+                        <li class="activity__li">Bought Apple shares – 10 pcs at $172.30</li>
+                        <li class="activity__li">Sold Tesla shares – 5 pcs at $710.50</li>
+                        <li class="activity__li">Dividend received – Microsoft, +$25</li>
+                        <li class="activity__li">Portfolio rebalanced – +15% Healthcare sector</li>
+                        <li class="activity__li">Sold NVIDIA shares – 12 pcs at $625.75</li>
+                        <li class="activity__li">Bought Amazon shares – 8 pcs at $135.20</li>
+                    </ul>
+                </div>
+
+                <div class="report">
+                    <h2 class="report__title">Boost Your Growth <i class="fa-solid fa-rocket"></i></h2>
+                    <p class="report__text">Generate a detailed report and track your progress instantly.</p>
+                    <button class="report__btn">Generate Report
+                    </button>
+                </div>
+
+                <div class="notifications-box">
+                    <div class="notifications-box__head">
+                        <p class="notifications-box__title">Notifications</p>
+                        <button class="notifications-box__close"><i class="fa-solid fa-xmark"></i></button>
+                    </div>
+                    <div class="notifications-box__body">
+
+                    </div>
+                    <a href="/" class="notifications-box__link">See all notifications</a>
+                </div>
+
+                <div class="user-panel">
+                    <div class="user-panel__head">
+                        <p class="user-panel__id">User ID: <span class="id">#j5e_dk1</span></p>
+                    </div>
+                    <hr>
+                    <ul class="user-panel__list">
+                        <li class="user__panel-li"><a href="/" class="user-panel__link">Profile</a></li>
+                        <li class="user-panel__li"><a href="/" class="user-panel__link">Help</a></li>
+                        <li class="user-panel__li"><a href="/" class="user-panel__link">Insights</a></li>
+                        <li class="user-panel__li"><a href="/" class="user-panel__link">Log out <i
+                                    class="fa-solid fa-arrow-right-from-bracket"></i></a></li>
+                    </ul>
+                </div>
+
+                <div class="tasks">
+                    <ul class="tasks__list">
+                        <li class="tasks__task" data-name="get-pro" data-number="0">
+                            <div class="tasks__task-info"> <span class="tasks__task-text">Buy PRO to unlock all
+                                    features</span>
+                                <div class="tasks__progress-box"><span class="tasks__progress-bar"></span></div>
+                                <div class="tasks__status">
+                                    <span class="tasks__target">0 / 1</span>
+                                    <i class="fa-solid fa-check"></i>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="tasks__task" data-name="first-transaction" data-number="0">
+                            <div class="tasks__task-info"> <span class="tasks__task-text">Add your first
+                                    transaction</span>
+                                <div class="tasks__progress-box"><span class="tasks__progress-bar"></span></div>
+                                <div class="tasks__status">
+                                    <span class="tasks__target">0 / 1</span>
+                                    <i class="fa-solid fa-check"></i>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="tasks__task" data-name="card-details" data-number="0">
+                            <div class="tasks__task-info"> <span class="tasks__task-text">Complete your payment card
+                                    details</span>
+                                <div class="tasks__progress-box"><span class="tasks__progress-bar"></span></div>
+                                <div class="tasks__status">
+                                    <span class="tasks__target">0 / 1</span>
+                                    <i class="fa-solid fa-check"></i>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </main>
+    </div>
 </body>
 
 </html>

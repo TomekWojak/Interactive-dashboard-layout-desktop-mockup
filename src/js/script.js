@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", function () {
 	const chart = document.querySelector(".statistics__chart");
 	const reportBtn = document.querySelector(".report__btn");
 	const links = document.querySelectorAll(".nav__link");
+	const dashboard = document.querySelector(".dashboard");
 	const months = [
 		"Jan",
 		"Feb",
@@ -84,6 +85,20 @@ document.addEventListener("DOMContentLoaded", function () {
 	];
 	const userPanel = document.querySelector(".user-panel");
 	const searchInput = document.querySelector(".header__input");
+
+	const loginPage = document.querySelector(".login-page");
+	const loginForm = document.querySelector(".login-page__container");
+	const loginInputs = document.querySelectorAll(".login-page__input");
+	const passForgottenLink = document.querySelector(
+		".login-page__pass-forgotten"
+	);
+	const loginBtn = document.querySelector(".login-page__login-btn");
+	const errorrInfo = document.querySelector(".error-info");
+	const usernameInput = document.querySelector(".login-page__input--username");
+	const passwordInput = document.querySelector(".login-page__input--password");
+	const USERNAME = "#j5e_dk1";
+	const PASSWORD = "123g45Z6789!";
+
 	const handleNavLinks = (e) => {
 		e.preventDefault();
 		links.forEach((link) => link.classList.remove("active"));
@@ -182,6 +197,65 @@ document.addEventListener("DOMContentLoaded", function () {
 	};
 
 	// END of TASKS MANAGER
+
+	// FORM VALIDATION
+	const handleInputs = (e) => {
+		e.preventDefault();
+		checkIfEmpty();
+	};
+	const checkIfEmpty = () => {
+		loginInputs.forEach((input) => {
+			if (!input.value.trim()) {
+				errorrInfo.textContent = "Complete all fields";
+				addError(input);
+			} else {
+				errorrInfo.textContent = "";
+				removeError(input);
+				checkInput(usernameInput, USERNAME);
+				checkInput(passwordInput, PASSWORD);
+			}
+		});
+		searchForErrors();
+	};
+	const checkInput = (input, condition) => {
+		if (input.value !== condition) {
+			errorrInfo.textContent = "Wrong username or password";
+			addError(input);
+		} else {
+			errorrInfo.textContent = "";
+			removeError(usernameInput);
+		}
+	};
+
+	const addError = (input) => {
+		input.classList.add("error");
+	};
+	const removeError = (input) => {
+		input.classList.remove("error");
+	};
+	let sending = false;
+	const searchForErrors = () => {
+		const hasError = Array.from(loginInputs).some((el) =>
+			el.classList.contains("error")
+		);
+		console.log(hasError);
+		if (sending) return;
+
+		if (!hasError) {
+			sending = true;
+			loginUser();
+
+			setTimeout(() => {
+				sending = false;
+			}, 1000);
+		}
+	};
+	const loginUser = () => {
+		dashboard.style.display = "grid";
+		loginPage.style.display = "none";
+	};
+	// END OF FORM VALIDATION
+
 	const createNotifications = () => {
 		const notificationsBody = document.querySelector(
 			".notifications-box__body"
@@ -345,4 +419,6 @@ document.addEventListener("DOMContentLoaded", function () {
 	headerPanel.addEventListener("click", handleHeaderPanel);
 	links.forEach((link) => link.addEventListener("click", handleNavLinks));
 	reportBtn.addEventListener("click", btnClickAnimation);
+	loginBtn.addEventListener("click", btnClickAnimation);
+	loginBtn.addEventListener("click", handleInputs);
 });

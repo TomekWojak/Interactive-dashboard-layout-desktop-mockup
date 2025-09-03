@@ -15,17 +15,117 @@
 	--title-color: #dedbdb;
 	--container-padding: 4em;
 	--panels-bg: #040d1b;
+	--login-page-color: #071020;
+	--login-form-color: #111a2b;
 }
 html {
 	font-size: 62.5%;
 }
 body {
+	font-family: "Montserrat", sans-serif;
+}
+.login-page {
 	height: 100vh;
-	display: grid;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: var(--login-page-color);
+	background: linear-gradient(to bottom, #071020, #0f172a);
+
+	&__container {
+		width: 44rem;
+		display: flex;
+		flex-direction: column;
+		text-align: center;
+		background-color: var(--login-form-color);
+		padding: 4em;
+		border-radius: var(--card-radius);
+	}
+	&__text {
+		font-size: 4.4rem;
+		font-weight: 600;
+		color: #fff;
+		margin-block-end: 0.5em;
+	}
+	&__input {
+		width: 100%;
+		padding: 1.4rem;
+		margin: 0.5em 0;
+		border-radius: var(--card-radius);
+		background-color: rgba(51, 65, 85, 0.184);
+		color: #f1f5f9;
+		border: 2px solid transparent;
+		font-size: 1.6rem;
+		transition: border-color 0.3s ease;
+
+		&::placeholder {
+			color: var(--components-main-color);
+		}
+		&:focus,
+		&:focus-visible {
+			outline: none;
+			border-color: var(--accent);
+		}
+	}
+	&__login-btn {
+		position: relative;
+		display: block;
+		width: 100%;
+		margin: 1em auto 1.5em;
+		padding: 1.2em 2em;
+		border-radius: var(--card-radius);
+		font-family: inherit;
+		font-weight: 600;
+		color: #fff;
+		border: 2px solid transparent;
+		background-color: var(--accent);
+		cursor: pointer;
+		font-size: 1.5rem;
+		transition: color 0.5s, background-color 0.5s, border-color 0.5s,
+			transform 0.3s;
+		overflow: hidden;
+		z-index: 0;
+
+		&:hover {
+			background: none;
+			border-color: var(--accent);
+		}
+		&:active {
+			transform: scale(0.98);
+		}
+		.circle {
+			height: 200px;
+			width: 200px;
+			background-color: var(--accent);
+		}
+	}
+	&__pass-forgotten {
+		width: fit-content;
+		margin: 0 auto;
+		text-decoration: none;
+		color: var(--components-main-color);
+		font-size: 1.5rem;
+
+		&:hover {
+			text-decoration: underline;
+		}
+	}
+	.error-info {
+		text-align: left;
+		color: #ff816b;
+		font-size: 1.3rem;
+	}
+}
+.dashboard {
+	min-height: 100vh;
+	display: none;
 	grid-template-rows: var(--header-height) 1fr;
 	grid-template-columns: 250px 1fr;
-	font-family: "Montserrat", sans-serif;
 	background-color: var(--main-color);
+
+	&.logged-in {
+		display: grid;
+	}
 }
 .header {
 	position: sticky;
@@ -668,6 +768,7 @@ main {
 	border-radius: 50%;
 	transform: translate(-50%, -50%) scale(0);
 	animation: fade 0.3s;
+	z-index: -1;
 }
 .activity {
 	grid-area: activity;
@@ -743,6 +844,7 @@ main {
 		transition: color 0.5s, background-color 0.5s, border-color 0.5s,
 			transform 0.3s;
 		overflow: hidden;
+		z-index: 0;
 
 		&:hover {
 			color: #fff;
