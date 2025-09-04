@@ -131,14 +131,14 @@ label[for="popup-username"],
 	position: relative;
 	margin-block-start: 2em;
 	appearance: none;
-	background-image: url("../chevron-down-solid-full.svg");
+	background-image: url("./chevron-down-solid-full.svg");
 	background-repeat: no-repeat;
 	background-position: right 1.2rem center;
 	background-size: 2rem;
 
 	&:focus,
 	&:focus-visible {
-		background-image: url("../chevron-up-solid-full.svg");
+		background-image: url("./chevron-up-solid-full.svg");
 	}
 }
 .error-txt {
