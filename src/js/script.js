@@ -190,7 +190,6 @@ document.addEventListener("DOMContentLoaded", function () {
 		}, 4000);
 	};
 	const savePopupData = () => {
-		updateUserData({ popupSeen: true });
 		checkPopup();
 	};
 	const checkPopup = () => {
@@ -211,8 +210,13 @@ document.addEventListener("DOMContentLoaded", function () {
 	const checkErrors = (errorTxt, username, selectedValue) => {
 		if (errorTxt.classList.contains("error")) return;
 
-		updateUserData({ username: username.value, location: selectedValue });
+		updateUserData({
+			username: username.value,
+			location: selectedValue,
+			popupSeen: true,
+		});
 		setUserInfo();
+
 		infoPopup.classList.remove("active");
 	};
 
