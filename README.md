@@ -3,11 +3,13 @@ Link: https://tomekwojak.github.io/Interactive-dashboard-layout-desktop-mockup/
 <br>
 💳 FinanceApp Mockup<br><br>
 ⚠️ **Note**: This is not a real finance app.
-<br>
-<br>
+
+
 This is an **interactive mockup** built for portfolio purposes.
 <br><br>
 After entering the website, you will see a login panel (as shown in the image below). You will need to enter your username and password.
+<br>
+
 <br><br>
 ![Wygląd panelu logowania](https://i.imgur.com/SN2SfMj.png)
 <br><br>
