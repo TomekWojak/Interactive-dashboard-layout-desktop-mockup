@@ -157,7 +157,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 	// POPUP
 
-	const COUNTRIES_DATA = "/countries.json";
+	const COUNTRIES_DATA = "./countries.json";
 
 	const downloadCoutries = () => {
 		fetch(COUNTRIES_DATA).then((res) =>
