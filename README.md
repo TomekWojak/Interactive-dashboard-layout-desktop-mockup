@@ -22,7 +22,7 @@ After entering the website, you will see a login panel (as shown in the image be
 You can also access this data by clicking 'Forgot password?'
 
 
-When we complete the login process the browser stores the user's login state in localStorage, and the UI updates dynamically based on this information.
+When we complete the login process the browser stores the user's login state in localStorage, and the UI updates dynamically based on this information. The data loading process is **simulated** on the front-end to mimic real server interactions.
 
 <br><br>
 ![Wygląd panelu logowania](https://i.imgur.com/SN2SfMj.png)
