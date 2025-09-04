@@ -12,10 +12,10 @@ This is an **interactive mockup** built for portfolio purposes.
 After entering the website, you will see a login panel (as shown in the image below). You will need to enter your username and password.
 
 Data:<br>
-Username:#j5e_dk1
-<br>
-Password: 123g45Z6789!
-<br>
+Username: **#j5e_dk1**
+<br><br>
+Password: **123g45Z6789!**
+<br><br>
 You can also access this data by clicking 'Forgot password?'
 
 <br><br>
