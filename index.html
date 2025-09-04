@@ -149,11 +149,14 @@
                     </div>
                     <hr>
                     <ul class="user-panel__list">
-                        <li class="user__panel-li"><a href="/" class="user-panel__link user-panel__link--profile">Profile</a></li>
-                        <li class="user-panel__li"><a href="/" class="user-panel__link user-panel__link--help">Help</a></li>
-                        <li class="user-panel__li"><a href="/" class="user-panel__link user-panel__link-insights">Insights</a></li>
-                        <li class="user-panel__li"><a href="/" class="user-panel__link user-panel__link--logout">Log out <i
-                                    class="fa-solid fa-arrow-right-from-bracket"></i></a></li>
+                        <li class="user__panel-li"><a href="/"
+                                class="user-panel__link user-panel__link--profile">Profile</a></li>
+                        <li class="user-panel__li"><a href="/" class="user-panel__link user-panel__link--help">Help</a>
+                        </li>
+                        <li class="user-panel__li"><a href="/"
+                                class="user-panel__link user-panel__link-insights">Insights</a></li>
+                        <li class="user-panel__li"><a href="/" class="user-panel__link user-panel__link--logout">Log out
+                                <i class="fa-solid fa-arrow-right-from-bracket"></i></a></li>
                     </ul>
                 </div>
 
@@ -196,17 +199,21 @@
         </main>
 
         <div class="popup-settings">
-            <span class="popup-settings__title">First time?</span>
-            <p class="popup__settings__text">Let's get to know you</p>
+            <div class="popup-settings__box">
+                <span class="popup-settings__title">First time?</span>
+                <p class="popup-settings__text">Let's get to know you</p>
 
-            <label for="popup-username">Username:</label>
-            <input class="popup-username__input" type="text" id="popup-username">
+                <label for="popup-username">Username:</label>
+                <input class="popup-username__input" type="text" id="popup-username">
 
-            <select class="popup-username__select">
-                
-            </select>
+                <p class="popup-country">Select your country</p>
+                <select class="popup-country__select">
+                    <option value="0" selected>-- Select country --</option>
+                </select>
+                <p class="error-txt"></p>
+                <button class="popup-settings__btn">Save</button>
+            </div>
         </div>
-
     </div>
 </body>
 

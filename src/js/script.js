@@ -99,6 +99,11 @@ document.addEventListener("DOMContentLoaded", function () {
 	const loginData = document.querySelector(".login-data");
 	const loadingBox = document.querySelector(".loading-box");
 
+	const infoPopup = document.querySelector(".popup-settings");
+	const popupUsername = document.querySelector(".popup-username__input");
+	const popupSelect = document.querySelector(".popup-country__select");
+	const popupBtn = document.querySelector(".popup-settings__btn");
+
 	const loadLoginPage = () => {
 		loginPage.classList.add("visible");
 	};
@@ -149,6 +154,69 @@ document.addEventListener("DOMContentLoaded", function () {
 	const showUserPanel = () => {
 		userPanel.classList.add("active");
 	};
+
+	// POPUP
+
+	const COUNTRIES_DATA = "/countries.json";
+
+	const downloadCoutries = () => {
+		fetch(COUNTRIES_DATA).then((res) =>
+			res.json().then((data) => {
+				for (country of data) {
+					const option = document.createElement("option");
+					option.value = country.name;
+					option.innerText = country.name;
+
+					popupSelect.append(option);
+				}
+			})
+		);
+	};
+
+	const showPopup = () => {
+		const obj = getUserData();
+
+		if (obj.popupSeen) return;
+
+		setTimeout(() => {
+			infoPopup.classList.add("active");
+
+			const popupBtn = document.querySelector(".popup-settings__btn");
+			downloadCoutries();
+
+			if (!popupBtn) return;
+
+			popupBtn.addEventListener("click", savePopupData);
+		}, 4000);
+	};
+	const savePopupData = () => {
+		updateUserData({ popupSeen: true });
+		checkPopup();
+		infoPopup.classList.remove("active");
+	};
+	const checkPopup = () => {
+		const popupUsername = document.querySelector(".popup-username__input");
+		const popupSelect = document.querySelector(".popup-country__select");
+		const errorTxt = infoPopup.querySelector(".error-txt");
+		const selectedValue = popupSelect.options[popupSelect.selectedIndex].value;
+		if (!popupUsername.value.trim() || selectedValue == 0) {
+			errorTxt.textContent = "Complete all fields";
+			errorTxt.classList.add("error");
+		} else {
+			errorTxt.classList.remove("error");
+			errorTxt.textContent = "";
+
+			checkErrors(errorTxt, popupUsername, selectedValue);
+		}
+	};
+	const checkErrors = (errorTxt, username, selectedValue) => {
+		if (errorTxt.classList.contains("error")) return;
+
+		updateUserData({ username: username.value, location: selectedValue });
+		setUserInfo();
+	};
+
+	// POPUP END
 
 	// START of TASKS MANAGER
 
@@ -268,8 +336,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
 		loggedIn = true;
 
-		createUserData();
-		updateUserData({ username: usernameInput.value, loggedIn });
+		const userData = getUserData();
+
+		if (userData === null) {
+			createUserData();
+		}
+		updateUserData({ usernameBasic: usernameInput.value, loggedIn });
 
 		setTimeout(() => {
 			loadingBox.classList.remove("active");
@@ -280,6 +352,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			handleRingStats();
 			createColumns();
 			setUserInfo();
+			showPopup();
 
 			usernameInput.value = "";
 			passwordInput.value = "";
@@ -291,7 +364,11 @@ document.addEventListener("DOMContentLoaded", function () {
 	};
 
 	const checkIfLoggedIn = () => {
-		const isLoggedIn = getUserData().loggedIn;
+		const userData = getUserData();
+
+		if (!userData) return;
+
+		const isLoggedIn = userData.loggedIn;
 
 		if (isLoggedIn !== null && isLoggedIn) {
 			dashboard.classList.add("logged-in");
@@ -301,6 +378,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			handleRingStats();
 			createColumns();
 			downloadUserInfo();
+			showPopup();
 		}
 	};
 
@@ -472,8 +550,8 @@ document.addEventListener("DOMContentLoaded", function () {
 		const panelUserName = userPanel.querySelector(".id");
 
 		const userData = getUserData();
-		userName.textContent = userData.username;
-		panelUserName.textContent = userData.username;
+		userName.textContent = userData.username || userData.usernameBasic;
+		panelUserName.textContent = userData.username || userData.usernameBasic;
 
 		if (!location) return;
 
@@ -503,7 +581,7 @@ document.addEventListener("DOMContentLoaded", function () {
 	};
 	const getUserData = () => {
 		const data = localStorage.getItem("userData");
-		return data ? JSON.parse(data) : {};
+		return data ? JSON.parse(data) : null;
 	};
 	const updateUserData = (newData) => {
 		const userData = getUserData();

@@ -1,3 +1,23 @@
+@mixin accentBtn {
+	position: relative;
+	display: block;
+	width: 100%;
+	margin: 1em auto 1.5em;
+	padding: 1.2em 2em;
+	border-radius: var(--card-radius);
+	font-family: inherit;
+	font-weight: 600;
+	color: #fff;
+	border: 2px solid transparent;
+	background-color: var(--accent);
+	cursor: pointer;
+	font-size: 1.5rem;
+	transition: color 0.5s, background-color 0.5s, border-color 0.5s,
+		transform 0.3s;
+	overflow: hidden;
+	z-index: 0;
+}
+
 .loading-box {
 	position: fixed;
 	display: none;
@@ -24,6 +44,110 @@
 	animation: spin 1.3s linear infinite;
 }
 
+// POPUP
+
+.popup-settings {
+	display: none;
+	opacity: 0;
+	position: fixed;
+	inset: 0;
+	background: rgba(0, 0, 0, 0.6);
+	z-index: 1999;
+	backdrop-filter: blur(1px);
+
+	&.active {
+		display: block;
+		animation: showPopup 0.5s forwards;
+	}
+
+	&__box {
+		position: absolute;
+		top: 20%;
+		left: 50%;
+		transform: translateX(-50%);
+		padding: 3em;
+		min-width: 50rem;
+		background-color: var(--login-form-color);
+		border-radius: var(--card-radius);
+		color: #fff;
+		text-align: center;
+	}
+	&__title {
+		font-size: 4rem;
+	}
+	&__text {
+		margin: 0.5em 0 3em;
+		font-size: 2rem;
+		text-align: center;
+	}
+	&__btn {
+		@include accentBtn;
+		margin-block-start: 2em;
+
+		&:hover {
+			background: none;
+			border-color: var(--accent);
+		}
+		&:active {
+			transform: scale(0.98);
+		}
+		.circle {
+			height: 200px;
+			width: 200px;
+			background-color: var(--accent);
+		}
+	}
+}
+label[for="popup-username"],
+.popup-country {
+	display: block;
+	text-align: left;
+	font-size: 2rem;
+	margin: 1em 0;
+}
+.popup-country {
+	margin: 2em 0 1em;
+}
+.popup-username__input,
+.popup-country__select {
+	display: block;
+	padding: 1em;
+	width: 100%;
+	border-radius: var(--card-radius);
+	border: 2px solid rgba(255, 255, 255, 0.4);
+	background: none;
+	background-color: var(--login-form-color);
+	color: #f1f5f9;
+	transition: border-color 0.3s;
+
+	&:focus,
+	&:focus-visible {
+		outline: none;
+		border-color: var(--accent);
+	}
+}
+
+.popup-country__select {
+	position: relative;
+	margin-block-start: 2em;
+	appearance: none;
+	background-image: url("/chevron-down-solid-full.svg");
+	background-repeat: no-repeat;
+	background-position: right 1.2rem center;
+	background-size: 2rem;
+
+	&:focus,
+	&:focus-visible {
+		background-image: url("/chevron-up-solid-full.svg");
+	}
+}
+.error-txt {
+	text-align: left;
+	color: #ff816b;
+	font-size: 1.5em;
+	margin-block-start: 1em;
+}
+
 @keyframes spin {
 	0% {
 		transform: rotate(0deg);
@@ -32,5 +156,13 @@
 	100% {
 		transform: rotate(360deg);
 		transform-origin: center;
+	}
+}
+@keyframes showPopup {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
 	}
 }
