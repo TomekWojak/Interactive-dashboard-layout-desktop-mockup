@@ -192,7 +192,6 @@ document.addEventListener("DOMContentLoaded", function () {
 	const savePopupData = () => {
 		updateUserData({ popupSeen: true });
 		checkPopup();
-		infoPopup.classList.remove("active");
 	};
 	const checkPopup = () => {
 		const popupUsername = document.querySelector(".popup-username__input");
@@ -214,6 +213,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 		updateUserData({ username: username.value, location: selectedValue });
 		setUserInfo();
+		infoPopup.classList.remove("active");
 	};
 
 	// POPUP END
