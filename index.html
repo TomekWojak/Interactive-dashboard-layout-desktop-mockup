@@ -16,15 +16,29 @@
 
 <body>
     <div class="login-page">
-        <form class="login-page__container">
-            <span class="login-page__text">Login</span>
-            <input type="text" class="login-page__input login-page__input--username" placeholder="Username">
-            <input type="password" class="login-page__input login-page__input--password" placeholder="Password">
-            <p class="error-info"></p>
-            <button class="login-page__login-btn">Sign in</button>
-            <a href="/" class="login-page__pass-forgotten">Forgot password?</a>
-        </form>
+        <div class="login-page__form-box">
+            <div class="login-data">
+                <p>Username: <span class="username">#j5e_dk1</span></p>
+
+                <p>Password: <span class="password">123g45Z6789!</span></p>
+            </div>
+            <form class="login-page__container">
+                <span class="login-page__text">Login</span>
+                <input type="text" class="login-page__input login-page__input--username" placeholder="Username">
+                <input type="password" class="login-page__input login-page__input--password" placeholder="Password">
+                <p class="error-info"></p>
+                <button class="login-page__login-btn">Sign in</button>
+                <a href="/" class="login-page__pass-forgotten">Forgot password?</a>
+            </form>
+        </div>
     </div>
+
+    <div class="loading-box">
+        <svg class="loading-area" viewBox="0 0 120 120" width="120" height="120">
+            <circle class="loading-circle" r="40" cx="60" cy="60" />
+        </svg>
+    </div>
+
     <div class="dashboard">
         <header class="header">
             <a href="/" class="header__logo"><i class="fa-regular fa-file"></i> Dashboard</a>
@@ -135,10 +149,10 @@
                     </div>
                     <hr>
                     <ul class="user-panel__list">
-                        <li class="user__panel-li"><a href="/" class="user-panel__link">Profile</a></li>
-                        <li class="user-panel__li"><a href="/" class="user-panel__link">Help</a></li>
-                        <li class="user-panel__li"><a href="/" class="user-panel__link">Insights</a></li>
-                        <li class="user-panel__li"><a href="/" class="user-panel__link">Log out <i
+                        <li class="user__panel-li"><a href="/" class="user-panel__link user-panel__link--profile">Profile</a></li>
+                        <li class="user-panel__li"><a href="/" class="user-panel__link user-panel__link--help">Help</a></li>
+                        <li class="user-panel__li"><a href="/" class="user-panel__link user-panel__link-insights">Insights</a></li>
+                        <li class="user-panel__li"><a href="/" class="user-panel__link user-panel__link--logout">Log out <i
                                     class="fa-solid fa-arrow-right-from-bracket"></i></a></li>
                     </ul>
                 </div>

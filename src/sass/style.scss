@@ -1,3 +1,4 @@
+@use "./components" as *;
 * {
 	margin: 0;
 	padding: 0;
@@ -26,13 +27,20 @@ body {
 }
 .login-page {
 	height: 100vh;
-	display: flex;
+	display: none;
 	justify-content: center;
 	align-items: center;
 	background-color: var(--login-page-color);
 	background: linear-gradient(to bottom, #071020, #0f172a);
 
+	&.visible {
+		display: flex;
+	}
+	&__form-box {
+		position: relative;
+	}
 	&__container {
+		position: relative;
 		width: 44rem;
 		display: flex;
 		flex-direction: column;
@@ -116,6 +124,44 @@ body {
 		font-size: 1.3rem;
 	}
 }
+.login-data {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	position: absolute;
+	top: 0;
+	right: -1em;
+	height: 200px;
+	width: 250px;
+	transform: translateX(-50%);
+	background-color: var(--login-form-color);
+	border-radius: var(--card-radius);
+	padding: 2em;
+	color: #fff;
+	text-align: left;
+	transition: transform 0.5s;
+
+	&.active {
+		transform: translate(100%);
+	}
+
+	p,
+	span {
+		font-size: 1.6rem;
+	}
+	p {
+		color: var(--accent);
+
+		&:last-child {
+			margin-block-start: 1em;
+		}
+	}
+	span {
+		color: #fff;
+		font-weight: 600;
+	}
+}
+
 .dashboard {
 	min-height: 100vh;
 	display: none;
@@ -398,7 +444,7 @@ main {
 	position: relative;
 	padding: var(--container-padding);
 	display: grid;
-	width: min(100%, 137rem);
+	width: min(100%, 130rem);
 	margin: 0 auto;
 	grid-auto-columns: 1fr;
 	grid-template-areas:

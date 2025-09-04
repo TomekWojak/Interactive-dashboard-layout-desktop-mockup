@@ -69,6 +69,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			from: "Support Team",
 		},
 	];
+	const loadingTime = 4000;
 	const CIRCLE_DASHARR = 314;
 	const messagesPanel = document.querySelector(".notifications-box");
 	const headerPanel = document.querySelector(".header__panel");
@@ -87,7 +88,6 @@ document.addEventListener("DOMContentLoaded", function () {
 	const searchInput = document.querySelector(".header__input");
 
 	const loginPage = document.querySelector(".login-page");
-	const loginForm = document.querySelector(".login-page__container");
 	const loginInputs = document.querySelectorAll(".login-page__input");
 	const passForgottenLink = document.querySelector(
 		".login-page__pass-forgotten"
@@ -96,8 +96,12 @@ document.addEventListener("DOMContentLoaded", function () {
 	const errorrInfo = document.querySelector(".error-info");
 	const usernameInput = document.querySelector(".login-page__input--username");
 	const passwordInput = document.querySelector(".login-page__input--password");
-	const USERNAME = "#j5e_dk1";
-	const PASSWORD = "123g45Z6789!";
+	const loginData = document.querySelector(".login-data");
+	const loadingBox = document.querySelector(".loading-box");
+
+	const loadLoginPage = () => {
+		loginPage.classList.add("visible");
+	};
 
 	const handleNavLinks = (e) => {
 		e.preventDefault();
@@ -199,9 +203,13 @@ document.addEventListener("DOMContentLoaded", function () {
 	// END of TASKS MANAGER
 
 	// FORM VALIDATION
+	const USERNAME = "#j5e_dk1";
+	const PASSWORD = "123g45Z6789!";
+
 	const handleInputs = (e) => {
 		e.preventDefault();
 		checkIfEmpty();
+		searchForErrors();
 	};
 	const checkIfEmpty = () => {
 		loginInputs.forEach((input) => {
@@ -211,19 +219,17 @@ document.addEventListener("DOMContentLoaded", function () {
 			} else {
 				errorrInfo.textContent = "";
 				removeError(input);
-				checkInput(usernameInput, USERNAME);
-				checkInput(passwordInput, PASSWORD);
+				checkInputs(input);
 			}
 		});
-		searchForErrors();
 	};
-	const checkInput = (input, condition) => {
-		if (input.value !== condition) {
+	const checkInputs = (input) => {
+		if (usernameInput.value !== USERNAME || passwordInput.value !== PASSWORD) {
 			errorrInfo.textContent = "Wrong username or password";
 			addError(input);
 		} else {
 			errorrInfo.textContent = "";
-			removeError(usernameInput);
+			removeError(input);
 		}
 	};
 
@@ -238,7 +244,6 @@ document.addEventListener("DOMContentLoaded", function () {
 		const hasError = Array.from(loginInputs).some((el) =>
 			el.classList.contains("error")
 		);
-		console.log(hasError);
 		if (sending) return;
 
 		if (!hasError) {
@@ -248,13 +253,73 @@ document.addEventListener("DOMContentLoaded", function () {
 			setTimeout(() => {
 				sending = false;
 			}, 1000);
+		} else {
 		}
 	};
-	const loginUser = () => {
-		dashboard.style.display = "grid";
-		loginPage.style.display = "none";
-	};
+
 	// END OF FORM VALIDATION
+
+	// LOGIN DATA
+	let loggedIn;
+	const loginUser = () => {
+		loadingBox.classList.add("active");
+		loginData.classList.remove("active");
+
+		loggedIn = true;
+		localStorage.setItem("loggedIn", loggedIn);
+
+		setTimeout(() => {
+			usernameInput.value = "";
+			passwordInput.value = "";
+
+			loadingBox.classList.remove("active");
+			dashboard.classList.add("logged-in");
+			loginPage.classList.remove("visible");
+
+			handleRingStats();
+			createColumns();
+		}, loadingTime);
+	};
+	const handleLoginData = (e) => {
+		e.preventDefault();
+		loginData.classList.toggle("active");
+	};
+
+	const checkIfLoggedIn = () => {
+		const isLoggedIn = localStorage.getItem("loggedIn");
+
+		if (isLoggedIn !== null && isLoggedIn) {
+			dashboard.classList.add("logged-in");
+			loadingBox.classList.remove("active");
+			loginPage.classList.remove("visible");
+			handleRingStats();
+			createColumns();
+		}
+	};
+
+	// END OF LOGIN DATA
+
+	const handleUserPanel = (e) => {
+		e.preventDefault();
+
+		if (dashboard !== null) {
+			if (e.target.matches(".user-panel__link--logout")) {
+				logoutUser();
+			}
+		}
+	};
+
+	// LOGOUT USER
+	const logoutUser = () => {
+		localStorage.removeItem("loggedIn");
+		loadingBox.classList.add("active");
+
+		setTimeout(() => {
+			dashboard.classList.remove("logged-in");
+			loginPage.classList.add("visible");
+			loadingBox.classList.remove("active");
+		}, loadingTime);
+	};
 
 	const createNotifications = () => {
 		const notificationsBody = document.querySelector(
@@ -377,8 +442,11 @@ document.addEventListener("DOMContentLoaded", function () {
 		});
 	};
 
-	handleRingStats();
-	createColumns();
+	loadLoginPage();
+	checkIfLoggedIn();
+
+	
+	userPanel.addEventListener("click", handleUserPanel);
 	window.addEventListener("click", (e) => {
 		if (
 			!notificationsBox.contains(e.target) &&
@@ -421,4 +489,5 @@ document.addEventListener("DOMContentLoaded", function () {
 	reportBtn.addEventListener("click", btnClickAnimation);
 	loginBtn.addEventListener("click", btnClickAnimation);
 	loginBtn.addEventListener("click", handleInputs);
+	passForgottenLink.addEventListener("click", handleLoginData);
 });
