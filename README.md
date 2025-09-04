@@ -6,9 +6,15 @@ Link: https://tomekwojak.github.io/Interactive-dashboard-layout-desktop-mockup/
 
 
 This is an **interactive mockup** built for portfolio purposes.
-<br><br>
+
+
+
 After entering the website, you will see a login panel (as shown in the image below). You will need to enter your username and password.
-<br>
+
+Data: 
+
+Username:#j5e_dk1
+Password: 123g45Z6789!
 
 <br><br>
 ![Wygląd panelu logowania](https://i.imgur.com/SN2SfMj.png)
