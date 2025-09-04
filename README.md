@@ -1,12 +1,32 @@
 Link: https://tomekwojak.github.io/Interactive-dashboard-layout-desktop-mockup/
 <br>
+Data:<br>
+Username: **#j5e_dk1**
+<br>
+Password: **123g45Z6789!**
+<br><br>
+<br>
 <br>
 💳 FinanceApp Mockup<br><br>
 ⚠️ **Note**: This is not a real finance app.
-<br>
-<br>
-This is an **interactive mockup** built for portfolio purposes.
 
+
+This is an **interactive mockup** built for portfolio purposes.
+<br>
+<br>
+<br>
+<br>
+After entering the website, you will see a login panel (as shown in the image below). You will need to enter your username and password.
+
+
+You can also access this data by clicking 'Forgot password?'
+
+
+When we complete the login process the browser stores the user's login state in localStorage, and the UI updates dynamically based on this information. The data loading process is **simulated** on the front-end to mimic real server interactions.
+
+<br><br>
+![Wygląd panelu logowania](https://i.imgur.com/SN2SfMj.png)
+<br><br>
 The application simulates: 
 - notifications, randomly generated charts on refresh,
 - UI interactions (Pro subscribtion, progress circle, task completion, etc.).
