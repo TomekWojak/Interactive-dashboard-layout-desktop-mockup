@@ -377,6 +377,7 @@ body {
 		height: 32px;
 		border-radius: 50%;
 		border: 1px solid rgba(167, 139, 250, 0.4);
+		color: #c2c2d6;
 	}
 	&__user-info {
 		margin-inline-start: 1.3em;
@@ -541,7 +542,7 @@ main {
 		cursor: pointer;
 	}
 	.id {
-		margin-inline-start: 1em;
+		margin-inline-start: .5em;
 		font-weight: 600;
 		color: var(--accent);
 		text-transform: uppercase;

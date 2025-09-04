@@ -261,23 +261,28 @@ document.addEventListener("DOMContentLoaded", function () {
 
 	// LOGIN DATA
 	let loggedIn;
+
 	const loginUser = () => {
 		loadingBox.classList.add("active");
 		loginData.classList.remove("active");
 
 		loggedIn = true;
-		localStorage.setItem("loggedIn", loggedIn);
+
+		createUserData();
+		updateUserData({ username: usernameInput.value, loggedIn });
 
 		setTimeout(() => {
-			usernameInput.value = "";
-			passwordInput.value = "";
-
 			loadingBox.classList.remove("active");
 			dashboard.classList.add("logged-in");
 			loginPage.classList.remove("visible");
 
+			clearChartAndProgressRing();
 			handleRingStats();
 			createColumns();
+			setUserInfo();
+
+			usernameInput.value = "";
+			passwordInput.value = "";
 		}, loadingTime);
 	};
 	const handleLoginData = (e) => {
@@ -286,14 +291,16 @@ document.addEventListener("DOMContentLoaded", function () {
 	};
 
 	const checkIfLoggedIn = () => {
-		const isLoggedIn = localStorage.getItem("loggedIn");
+		const isLoggedIn = getUserData().loggedIn;
 
 		if (isLoggedIn !== null && isLoggedIn) {
 			dashboard.classList.add("logged-in");
 			loadingBox.classList.remove("active");
 			loginPage.classList.remove("visible");
+
 			handleRingStats();
 			createColumns();
+			downloadUserInfo();
 		}
 	};
 
@@ -303,15 +310,20 @@ document.addEventListener("DOMContentLoaded", function () {
 		e.preventDefault();
 
 		if (dashboard !== null) {
-			if (e.target.matches(".user-panel__link--logout")) {
-				logoutUser();
+			if (e.target.matches(".user-panel__link")) {
+				hidePanel(userPanel);
+
+				if (e.target.matches(".user-panel__link--logout")) {
+					logoutUser();
+				}
 			}
 		}
 	};
 
 	// LOGOUT USER
 	const logoutUser = () => {
-		localStorage.removeItem("loggedIn");
+		updateUserData({ loggedIn: false });
+
 		loadingBox.classList.add("active");
 
 		setTimeout(() => {
@@ -319,6 +331,17 @@ document.addEventListener("DOMContentLoaded", function () {
 			loginPage.classList.add("visible");
 			loadingBox.classList.remove("active");
 		}, loadingTime);
+	};
+	const clearChartAndProgressRing = () => {
+		const rings = [
+			document.querySelector(".progress-ring__progress"),
+			document.querySelector(".progress-ring__progress-bg"),
+		];
+		rings.forEach((ring) => {
+			ring.style.strokeWidth = 0;
+			ring.style.strokeDashoffset = CIRCLE_DASHARR;
+		});
+		chart.innerHTML = "";
 	};
 
 	const createNotifications = () => {
@@ -442,10 +465,55 @@ document.addEventListener("DOMContentLoaded", function () {
 		});
 	};
 
+	const setUserInfo = () => {
+		const aside = document.querySelector(".aside");
+		const userName = aside.querySelector(".aside__user-name");
+		const userLocation = aside.querySelector(".aside__user-location");
+		const panelUserName = userPanel.querySelector(".id");
+
+		const userData = getUserData();
+		userName.textContent = userData.username;
+		panelUserName.textContent = userData.username;
+
+		if (!location) return;
+
+		userLocation.textContent = userData.location;
+	};
+	const downloadUserInfo = () => {
+		const userData = getUserData();
+
+		if (!userData || !userData.username) return;
+
+		const aside = document.querySelector(".aside");
+		const userName = aside.querySelector(".aside__user-name");
+		const panelUserName = userPanel.querySelector(".id");
+
+		userName.textContent = userData.username;
+		panelUserName.textContent = userData.username;
+
+		if (!userData.location) return;
+
+		const userLocation = aside.querySelector(".aside__user-location");
+		userLocation.textContent = userData.location;
+	};
+
+	const createUserData = () => {
+		const userData = {};
+		localStorage.setItem("userData", JSON.stringify(userData));
+	};
+	const getUserData = () => {
+		const data = localStorage.getItem("userData");
+		return data ? JSON.parse(data) : {};
+	};
+	const updateUserData = (newData) => {
+		const userData = getUserData();
+		const updatedData = { ...userData, ...newData };
+		localStorage.setItem("userData", JSON.stringify(updatedData));
+		return updatedData;
+	};
+
 	loadLoginPage();
 	checkIfLoggedIn();
-
-	
 	userPanel.addEventListener("click", handleUserPanel);
 	window.addEventListener("click", (e) => {
 		if (
